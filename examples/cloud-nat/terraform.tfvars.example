@@ -1,0 +1,13 @@
+# =====================================================================
+# Sample terraform.tfvars for cloud-nat
+# Copy this file to terraform.tfvars and update values for your environment
+# =====================================================================
+
+# The project ID to deploy to
+project_id = "your-gcp-project-id"
+
+# The VPC network self link
+network = "vpc-sample-demo"
+
+# The subnet self link
+subnet = "sample-value"

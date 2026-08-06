@@ -1,0 +1,24 @@
+# =====================================================================
+# Sample terraform.tfvars for Cloud Logging Example
+# Copy this file to terraform.tfvars and update values for your environment
+# =====================================================================
+
+# Target GCP Project ID hosting central log buckets & sinks
+# Note: GCP requires a project ID for log bucket sink destinations, even for folder-level sinks.
+project_id = "your-gcp-project-id"
+
+# Target GCP Folder ID for folder-level log aggregation & interception
+folder_id = "folders/1234567890"
+
+# Set TRUE to disable project-level _Default sinks and prevent global log storage
+disable_default_sink = true
+
+# Custom Regional Log Bucket settings (Data Residency compliance)
+regional_bucket_location = "us-east1"
+regional_bucket_id       = "us-east1-regional1-app-logs"
+
+# Optional: BigQuery dataset ID for audit log export (Set null if BigQuery sink is not needed)
+audit_dataset_id = null
+
+# Optional: Cloud Storage bucket for long-term log archiving (Set null if GCS archive sink is not needed)
+archive_bucket_name = null

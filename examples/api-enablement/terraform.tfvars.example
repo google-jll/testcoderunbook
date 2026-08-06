@@ -1,0 +1,16 @@
+# =====================================================================
+# Sample terraform.tfvars for api-enablement
+# Copy this file to terraform.tfvars and update values for your environment
+# =====================================================================
+
+# The GCP project to enable APIs on.
+project_id = "your-gcp-project-id"
+
+# List of APIs to enable on the project.
+activate_apis = ["compute.googleapis.com", "dns.googleapis.com"]
+
+# Whether project services will be disabled when the resources are destroyed.
+disable_services_on_destroy = "terraform-sa@your-gcp-project-id.iam.gserviceaccount.com"
+
+# Whether dependent services are also disabled on destroy.
+disable_dependent_services = "terraform-sa@your-gcp-project-id.iam.gserviceaccount.com"

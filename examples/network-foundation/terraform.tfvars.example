@@ -1,0 +1,25 @@
+# =====================================================================
+# Sample terraform.tfvars for network-foundation
+# Copy this file to terraform.tfvars and update values for your environment
+# =====================================================================
+
+# The target GCP Project ID.
+project_id = "your-gcp-project-id"
+
+# The name of the VPC.
+vpc_name = "sample-vpc-name"
+
+# Workload environment lifecycle stage (e.g., dev, uat, prod).
+environment = "sample-value"
+
+# The primary region for deployment.
+region = "us-west1"
+
+# CIDR range for the DMZ / Load Balancer Proxy Subnet Tier.
+subnet_cidr_dmz = "10.10.1.0/24"
+
+# CIDR range for the App Instances Subnet Tier.
+subnet_cidr_app = "10.10.2.0/24"
+
+# CIDR range for the Data Subnet Tier.
+subnet_cidr_data = "10.10.3.0/24"

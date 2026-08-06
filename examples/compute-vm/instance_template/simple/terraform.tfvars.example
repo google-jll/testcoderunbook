@@ -1,0 +1,27 @@
+# =====================================================================
+# Sample terraform.tfvars for compute-vm/instance_template/simple
+# Copy this file to terraform.tfvars and update values for your environment
+# =====================================================================
+
+# The GCP project to use for integration tests
+project_id = "your-gcp-project-id"
+
+# The GCP region to create and test resources in
+region = "us-central1"
+
+# The name of the subnetwork create this instance in.
+subnetwork = "vpc-sample-demo"
+
+service_account = "terraform-sa@your-gcp-project-id.iam.gserviceaccount.com"
+
+# Network tags, provided as a list
+tags = ["value-1", "value-2"]
+
+# Labels, provided as a map
+labels = {}
+
+# Defines whether the instance should have nested virtualization enabled.
+enable_nested_virtualization = false
+
+# The number of threads per physical core. To disable simultaneous multithreading (SMT) set this to 1.
+threads_per_core = null

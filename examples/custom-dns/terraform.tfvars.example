@@ -1,0 +1,51 @@
+# =====================================================================
+# Sample terraform.tfvars for custom-dns
+# Copy this file to terraform.tfvars and update values for your environment.
+# The referenced VPCs (platform_vpc_name, app_spoke_vpc_names) must already exist.
+# =====================================================================
+
+project_id = "jll-app2"
+region     = "us-east1"
+
+# Existing VPCs.
+platform_vpc_name   = "app2"                    # dedicated AD / platform VPC
+app_spoke_vpc_names = ["vpc-secure-tags-demo"]  # workload spoke VPC(s)
+
+# Inbound endpoint on the platform VPC (for AD conditional forwarders).
+enable_inbound_endpoint = true
+inbound_policy_name     = "ad-to-cloud-dns-inbound-policy"
+
+# googleapis.com / p.googleapis.com -> restricted PGA VIPs.
+enable_google_apis_psc_dns = true
+google_apis_vips = [
+  "199.36.153.4",
+  "199.36.153.5",
+  "199.36.153.6",
+  "199.36.153.7",
+]
+
+# Custom private zone(s). Set `name` for a specific record FQDN, or omit it to
+# create the record at the zone apex (gcp.internal.company.com.).
+private_zones = {
+  "internal-gcp-custom" = {
+    dns_name    = "gcp.internal.company.com."
+    description = "Internal GCP Workload Services"
+    records = {
+      "app-api" = {
+        name    = "api.gcp.internal.company.com."
+        type    = "A"
+        ttl     = 300
+        records = ["10.100.10.50"]
+      }
+    }
+  }
+}
+
+# Outbound forwarding zone(s): send corporate-domain queries to AD DNS.
+forwarding_zones = {
+  "corp-ad-domain" = {
+    dns_name            = "corp.jll.com."
+    description         = "Forward corporate domain queries directly to AD DNS"
+    target_name_servers = ["10.10.1.10", "10.10.1.11"]
+  }
+}

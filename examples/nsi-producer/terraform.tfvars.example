@@ -1,0 +1,22 @@
+# =====================================================================
+# Sample terraform.tfvars for nsi-producer
+# Copy this file to terraform.tfvars and update values for your environment
+# =====================================================================
+
+# The GCP project to deploy the producer into.
+project_id = "your-gcp-project-id"
+
+# The GCP region for the networks, firewalls, and load balancer.
+region = "us-central1"
+
+# If true, create a mirroring deployment; if false, an intercept deployment. Must match the consumer.
+mirroring_deployment = false
+
+# VM-Series device certificate registration PIN ID (optional for plan).
+csp_pin_id = ""
+
+# VM-Series device certificate registration PIN value (optional for plan).
+csp_pin_value = ""
+
+# (BYOL) authcode registered with your CSP account (optional for plan).
+csp_authcodes = ""

@@ -1,0 +1,7 @@
+# =====================================================================
+# Sample terraform.tfvars for iam/service-account
+# Copy this file to terraform.tfvars and update values for your environment
+# =====================================================================
+
+# The GCP project to create the service account in.
+project_id = "your-gcp-project-id"

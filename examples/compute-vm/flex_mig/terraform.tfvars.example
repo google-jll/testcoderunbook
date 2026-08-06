@@ -1,0 +1,13 @@
+# =====================================================================
+# Sample terraform.tfvars for compute-vm/flex_mig
+# Copy this file to terraform.tfvars and update values for your environment
+# =====================================================================
+
+# The GCP project to create the resources in.
+project_id = "your-gcp-project-id"
+
+# The GCP region for the subnet and the flexible MIG.
+region = "us-central1"
+
+# The target number of running instances for the flexible MIG.
+target_size = 3

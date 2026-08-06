@@ -1,0 +1,10 @@
+# =====================================================================
+# Sample terraform.tfvars for dns-ad-hybrid
+# Copy this file to terraform.tfvars and update values for your environment
+# =====================================================================
+
+# The GCP project ID hosting DNS.
+project_id = "your-gcp-project-id"
+
+# The self_link of the consuming VPC network.
+vpc_network_self_link = "vpc-sample-demo"

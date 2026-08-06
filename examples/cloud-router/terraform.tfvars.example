@@ -1,0 +1,7 @@
+# =====================================================================
+# Sample terraform.tfvars for cloud-router
+# Copy this file to terraform.tfvars and update values for your environment
+# =====================================================================
+
+# The GCP project ID
+project_id = "your-gcp-project-id"

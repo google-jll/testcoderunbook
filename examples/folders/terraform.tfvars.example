@@ -1,0 +1,7 @@
+# =====================================================================
+# Sample terraform.tfvars for folders
+# Copy this file to terraform.tfvars and update values for your environment
+# =====================================================================
+
+# Resource name of the parent folder or organization, e.g. \
+parent = "sample-value"

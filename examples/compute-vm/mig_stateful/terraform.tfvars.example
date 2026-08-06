@@ -1,0 +1,18 @@
+# =====================================================================
+# Sample terraform.tfvars for compute-vm/mig_stateful
+# Copy this file to terraform.tfvars and update values for your environment
+# =====================================================================
+
+# The GCP project to use for integration tests
+project_id = "your-gcp-project-id"
+
+# The GCP region to create and test resources in
+region = "us-central1"
+
+# The subnetwork to host the compute instances in
+subnetwork = "vpc-sample-demo"
+
+# The target number of running instances for this managed instance group. This value should always be explicitly set unless this resource is attached to an autoscaler, in which case it should never be set.
+target_size = "sample-value"
+
+service_account = "terraform-sa@your-gcp-project-id.iam.gserviceaccount.com"

@@ -1,0 +1,15 @@
+# =====================================================================
+# Sample terraform.tfvars for compute-vm/instance_template/alias_ip_range
+# Copy this file to terraform.tfvars and update values for your environment
+# =====================================================================
+
+# The GCP project to use for integration tests
+project_id = "your-gcp-project-id"
+
+# The GCP region to create and test resources in
+region = "us-central1"
+
+# The name of the subnetwork create this instance in.
+subnetwork = "vpc-sample-demo"
+
+service_account = "terraform-sa@your-gcp-project-id.iam.gserviceaccount.com"

@@ -1,0 +1,66 @@
+# =====================================================================
+# Sample terraform.tfvars for Global External Load Balancer with Cloud Armor, Flex MIG, Secure Tags & NSI Consumer
+# Copy this file to terraform.tfvars and update values for your GCP environment
+# =====================================================================
+
+# Target GCP Project ID
+project_id = "jll-app1"
+
+# GCP Organization ID (required for NSI Consumer security profile/group)
+org_id = "652263855516"
+
+# Deployment GCP region
+region = "us-west1"
+
+# Palo Alto NSI Producer Deployment Group in project jllnetworkhub
+producer_dg = "projects/jllnetworkhub/locations/global/interceptDeploymentGroups/testjll-panw-dg"
+
+# Network & Subnetwork configuration
+network_name = "elb-flex-mig-vpc"
+subnet_name  = "web-mig-subnet"
+subnet_cidr  = "10.10.10.0/24"
+
+# Secure Tag Key & Value configuration (Zero-Trust Identity Tags)
+tag_key_name   = "environment1"
+tag_value_name = "web-mig-node"
+
+# Cloud Armor Security Policy configuration
+cloud_armor_policy_name = "elb-cloud-armor-allowlist"
+
+# Whitelisted IPv4 CIDR blocks allowed to access the Load Balancer
+# Traffic from IPs outside these ranges will be blocked with HTTP 403 Forbidden
+allowed_ip_ranges = [
+  "203.0.113.0/24",  # Corporate Office CIDR
+  "198.51.100.5/32"  # Admin User Static IP
+]
+
+# Global External Load Balancer name
+elb_name = "global-web-elb"
+
+# Managed Instance Group configuration
+mig_name             = "web-app-mig"
+default_machine_type = "n1-standard-1"
+
+# Flex MIG Option: Set to true to use Flexible MIG with multiple machine types/ranks
+# Set to false to use Standard MIG with uniform instance shape
+enable_flex_mig = true
+
+# Flexible Instance Selections (Machine Types & Priority Ranks)
+flex_instance_selections = {
+  "selection-n1-standard-1" = {
+    machine_types = ["n1-standard-1"]
+    rank          = 1
+  }
+  "selection-n2-standard-2" = {
+    machine_types = ["n2-standard-2"]
+    rank          = 2
+  }
+  "selection-e2-standard-2" = {
+    machine_types = ["e2-standard-2"]
+    rank          = 3
+  }
+}
+
+# Autoscaling limits
+min_replicas = 2
+max_replicas = 5

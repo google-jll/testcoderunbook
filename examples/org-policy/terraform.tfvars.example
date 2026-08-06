@@ -1,0 +1,13 @@
+# =====================================================================
+# Sample terraform.tfvars for Org Policy Example
+# Copy this file to terraform.tfvars and update values for your environment
+# =====================================================================
+
+# Target GCP Project ID
+project_id = "your-gcp-project-id"
+
+# Optional: Target Organization or Folder URI (Default: "projects/your-gcp-project-id")
+# parent = "organizations/123456789012"
+
+# Allowed deployment regions
+allowed_regions = ["in:us-locations", "in:eu-locations"]

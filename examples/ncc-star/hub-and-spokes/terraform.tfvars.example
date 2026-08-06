@@ -1,0 +1,13 @@
+# =====================================================================
+# Sample terraform.tfvars for ncc-star/hub-and-spokes
+# Copy this file to terraform.tfvars and update values for your environment
+# =====================================================================
+
+# The GCP project that holds the hub and spoke networks.
+project_id = "your-gcp-project-id"
+
+# The GCP region for the spoke VPC subnets.
+region = "us-central1"
+
+# Name of the NCC hub.
+ncc_hub_name = "sample-ncc-hub-name"

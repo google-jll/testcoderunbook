@@ -1,0 +1,13 @@
+# =====================================================================
+# Sample terraform.tfvars for iam
+# Copy this file to terraform.tfvars and update values for your environment
+# =====================================================================
+
+# Project ids to apply the project-level IAM bindings to.
+projects = "your-gcp-project-id"
+
+# Folder ids to apply the folder-level IAM bindings to, e.g. \
+folders = ["value-1", "value-2"]
+
+# Members granted the viewer roles (e.g. \
+viewer_members = ["value-1", "value-2"]

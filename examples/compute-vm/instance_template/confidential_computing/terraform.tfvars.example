@@ -1,0 +1,16 @@
+# =====================================================================
+# Sample terraform.tfvars for compute-vm/instance_template/confidential_computing
+# Copy this file to terraform.tfvars and update values for your environment
+# =====================================================================
+
+# The Google Cloud project ID.
+project_id = "your-gcp-project-id"
+
+# The GCP region to create and test resources in.
+region = "us-central1"
+
+# The subnetwork selflink to host the compute instances in.
+subnetwork = "vpc-sample-demo"
+
+# Service account to attach to the instance. See https://www.terraform.io/docs/providers/google/r/compute_instance_template#service_account.
+service_account = "terraform-sa@your-gcp-project-id.iam.gserviceaccount.com"

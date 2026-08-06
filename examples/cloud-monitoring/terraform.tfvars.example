@@ -1,0 +1,36 @@
+# =====================================================================
+# Sample terraform.tfvars for Cloud Monitoring Example
+# Copy this file to terraform.tfvars and update values for your environment
+# =====================================================================
+
+# Target GCP Project ID where Cloud Monitoring resources will be deployed
+# Leave null to skip all resource creation
+project_id = "your-gcp-project-id"
+
+# DevOps notification channel recipient email
+alert_email = "devops-alerts@example.com"
+
+# CPU utilization threshold for alert policy (0.85 = 85%)
+cpu_threshold = 0.85
+
+# Hostname for synthetic HTTP availability uptime check
+app_hostname = "example.com"
+
+# =====================================================================
+# Resource Component Toggles (Set to true/false to selectively deploy components)
+# =====================================================================
+
+# Toggle Notification Channels creation (email, slack, pubsub, etc.)
+enable_notification_channels = true
+
+# Toggle Alert Policies creation (Threshold, Absence, Log Match)
+enable_alert_policies = true
+
+# Toggle Custom Metric Descriptors creation
+enable_metric_descriptors = true
+
+# Toggle Custom Dashboards creation
+enable_dashboards = true
+
+# Toggle Synthetic Uptime Checks creation
+enable_uptime_checks = true

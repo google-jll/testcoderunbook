@@ -1,0 +1,25 @@
+# =====================================================================
+# Sample terraform.tfvars for compute-vm/compute_instance
+# Copy this file to terraform.tfvars and update values for your environment
+# =====================================================================
+
+# The GCP project to create the resources in.
+project_id = "your-gcp-project-id"
+
+# The GCP region for the network and instances.
+region = "us-central1"
+
+# The GCP zone for the zonal instances and disks.
+zone = "us-central1-b"
+
+# Number of managed instances to create from the template.
+num_instances = 1
+
+# Service account to attach to the templated instances. See https://www.terraform.io/docs/providers/google/r/compute_instance_template#service_account.
+service_account = "terraform-sa@your-gcp-project-id.iam.gserviceaccount.com"
+
+# Optional external IP to assign to the managed instances. Null lets GCP assign an ephemeral IP.
+nat_ip = null
+
+# Network tier for the managed instances' external IP.
+network_tier = "vpc-sample-demo"

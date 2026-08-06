@@ -1,0 +1,13 @@
+# =====================================================================
+# Sample terraform.tfvars for cloud-armor
+# Copy this file to terraform.tfvars and update values for your environment
+# =====================================================================
+
+# The target project ID to host the security policy.
+project_id = "your-gcp-project-id"
+
+# The name of the Cloud Armor security policy.
+policy_name = "sample-policy-name"
+
+# List of whitelisted IP addresses mapped to Akamai WAF envelopes [4].
+allowed_ip_ranges = ["192.168.1.0/24", "10.0.0.0/16"]

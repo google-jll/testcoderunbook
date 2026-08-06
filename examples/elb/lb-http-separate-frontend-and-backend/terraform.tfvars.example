@@ -1,0 +1,6 @@
+# =====================================================================
+# Sample terraform.tfvars for elb/lb-http-separate-frontend-and-backend
+# Copy this file to terraform.tfvars and update values for your environment
+# =====================================================================
+
+project_id = "your-gcp-project-id"

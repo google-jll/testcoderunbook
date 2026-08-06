@@ -1,0 +1,66 @@
+# =====================================================================
+# Sample terraform.tfvars for compute-vm/umig/full
+# Copy this file to terraform.tfvars and update values for your environment
+# =====================================================================
+
+# The GCP project to use for integration tests
+project_id = "your-gcp-project-id"
+
+# Hostname prefix for instances.
+hostname = "sample-hostname"
+
+# The GCP region where instances will be deployed.
+region = "us-central1"
+
+# Subnet to deploy to. Only one of network or subnetwork should be specified.
+subnetwork = "vpc-sample-demo"
+
+# Named name and named port
+named_ports = "sample-named-ports"
+
+# Machine type to create, e.g. n1-standard-1
+machine_type = "n1-standard-1"
+
+# Enable IP forwarding, for NAT instances for example
+can_ip_forward = "false"
+
+# Network tags, provided as a list
+tags = ["value-1", "value-2"]
+
+# Labels, provided as a map
+labels = {}
+
+# Source disk image. If neither source_image nor source_image_family is specified, defaults to the latest public Rocky Linux 9 optimized for GCP image.
+source_image = ""
+
+# Source image family. If neither source_image nor source_image_family is specified, defaults to the latest public Rocky Linux 9 optimized for GCP image.
+source_image_family = ""
+
+# Project where the source image comes from. The default project contains Rocky Linux images.
+source_image_project = "your-gcp-project-id"
+
+# Disk size in GB
+disk_size_gb = "100"
+
+# Disk type, can be either pd-ssd, local-ssd, or pd-standard
+disk_type = "pd-standard"
+
+# Whether or not the disk should be auto-deleted
+auto_delete = "true"
+
+# List of maps of additional disks. See https://www.terraform.io/docs/providers/google/r/compute_instance_template#disk_name
+additional_disks = ["value-1", "value-2"]
+
+# User startup script to run when instances spin up
+startup_script = ""
+
+# Metadata, provided as a map
+metadata = {}
+
+service_account = "terraform-sa@your-gcp-project-id.iam.gserviceaccount.com"
+
+# The target number of running instances for this managed or unmanaged instance group. This value should always be explicitly set unless this resource is attached to an autoscaler, in which case it should never be set.
+target_size = 1
+
+# List of static IPs for VM instances.
+static_ips = ["192.168.1.0/24", "10.0.0.0/16"]

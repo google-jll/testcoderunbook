@@ -1,0 +1,10 @@
+# =====================================================================
+# Sample terraform.tfvars for elb/mig-nat-http-lb
+# Copy this file to terraform.tfvars and update values for your environment
+# =====================================================================
+
+region = "us-west1"
+
+network_name = "sample-network-name"
+
+project = "your-gcp-project-id"

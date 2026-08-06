@@ -1,0 +1,14 @@
+project_id   = "my-gcp-project-id"
+region       = "me-central2"
+zone         = "me-central2-a"
+network_name = "vpc-secure-tags-demo"
+subnet_cidr  = "10.10.0.0/24"
+
+# Optional: If you want to create Secure Tags at the Organization level, specify your Org ID:
+# parent     = "organizations/123456789012"
+# Otherwise, leave as null and it will automatically create project-scoped tags under "projects/<project_id>".
+parent       = null
+
+# Optional: Set to enable Palo Alto / NSI Intercept steering rules alongside custom rules
+# security_profile_group = "projects/jllnetworkhub/locations/global/securityProfileGroups/panw-spg"
+# create_profile_rules   = true

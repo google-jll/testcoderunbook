@@ -1,0 +1,10 @@
+# =====================================================================
+# Sample terraform.tfvars for ilb
+# Copy this file to terraform.tfvars and update values for your environment
+# =====================================================================
+
+# The GCP project to create the resources in.
+project_id = "your-gcp-project-id"
+
+# The GCP region for the network, MIG, and internal load balancer.
+region = "us-central1"

@@ -1,0 +1,28 @@
+# =====================================================================
+# Sample terraform.tfvars for compute-vm/confidential_computing
+# Copy this file to terraform.tfvars and update values for your environment
+# =====================================================================
+
+# The Google Cloud project ID.
+project_id = "your-gcp-project-id"
+
+# The GCP region to create and test resources in.
+region = "us-central1"
+
+# The subnetwork selflink to host the compute instances in.
+subnetwork = "vpc-sample-demo"
+
+# Location for the resources (keyring, key, network, etc.).
+location = "us"
+
+# A suffix to be used as an identifier for resources. (e.g., suffix for KMS Key, Keyring).
+suffix = ""
+
+# Keyring name.
+keyring = "sample-value"
+
+# Key name.
+key = "sample-value"
+
+# Predefined roles for the Service account that will be created for the VM. Remember to follow principles of least privileges with Cloud IAM.
+service_account_roles = "terraform-sa@your-gcp-project-id.iam.gserviceaccount.com"

@@ -1,0 +1,19 @@
+# =====================================================================
+# Sample terraform.tfvars for nsi-consumer
+# Copy this file to terraform.tfvars and update values for your environment
+# =====================================================================
+
+# The GCP project to deploy the consumer into.
+project_id = "your-gcp-project-id"
+
+# The GCP organization ID (the security profile/group are org-scoped).
+org_id = "sample-value"
+
+# The GCP region for the consumer network.
+region = "us-central1"
+
+# The producer's deployment group id (the nsi-producer example's `deployment_group_id` output).
+producer_dg = "sample-value"
+
+# If true, wire the mirroring path; if false, the intercept path. Must match the producer.
+mirroring_deployment = false
