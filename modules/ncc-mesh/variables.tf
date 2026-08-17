@@ -3,9 +3,28 @@ variable "project_id" {
   type        = string
 }
 
-variable "ncc_hub_name" {
-  description = "The Name of the NCC Hub"
+variable "create_hub" {
+  description = "Whether to create the NCC Hub resource. Set to false to attach spokes to an existing NCC Hub without managing the hub resource."
+  type        = bool
+  default     = true
+}
+
+variable "ncc_hub_id" {
+  description = "The Resource ID / URI of an existing NCC Hub to attach spokes to (used when create_hub is false). Example: projects/<project>/locations/global/hubs/<hub-name>"
   type        = string
+  default     = null
+}
+
+variable "ncc_hub_project" {
+  description = "The GCP project ID where the existing NCC Hub resides (used when create_hub is false and ncc_hub_name is provided instead of ncc_hub_id). Defaults to var.project_id if not specified."
+  type        = string
+  default     = null
+}
+
+variable "ncc_hub_name" {
+  description = "The Name of the NCC Hub (required when create_hub is true, or when create_hub is false and ncc_hub_id is not specified)."
+  type        = string
+  default     = null
 }
 
 variable "ncc_hub_description" {
@@ -42,6 +61,7 @@ variable "vpc_spokes" {
   description = "VPC network that is associated with the spoke. link_producer_vpc_network: Producer VPC network that is peered with vpc network. In a mesh hub all spokes reach each other any-to-any, so no group assignment is needed."
   type = map(object({
     uri                   = string
+    project               = optional(string)
     exclude_export_ranges = optional(set(string), [])
     include_export_ranges = optional(set(string), [])
     description           = optional(string)
@@ -62,6 +82,7 @@ variable "vpc_spokes" {
 variable "hybrid_spokes" {
   description = "VLAN attachments and VPN Tunnels that are associated with the spoke. Type must be one of `interconnect` and `vpn`."
   type = map(object({
+    project                    = optional(string)
     location                   = string
     uris                       = set(string)
     site_to_site_data_transfer = optional(bool, false)
@@ -76,6 +97,7 @@ variable "hybrid_spokes" {
 variable "router_appliance_spokes" {
   description = "Router appliance instances that are associated with the spoke."
   type = map(object({
+    project   = optional(string)
     instances = set(object({
       virtual_machine = string
       ip_address      = string

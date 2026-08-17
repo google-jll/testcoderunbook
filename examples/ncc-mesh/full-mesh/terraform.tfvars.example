@@ -1,13 +1,19 @@
 # =====================================================================
-# Sample terraform.tfvars for ncc-mesh/full-mesh
+# Sample terraform.tfvars for NCC Mesh Full Mesh Example
 # Copy this file to terraform.tfvars and update values for your environment
 # =====================================================================
 
-# The GCP project that holds the hub and spoke networks.
+# Required: The GCP project where the hub and spoke VPCs will be created
 project_id = "your-gcp-project-id"
 
-# The GCP region for the spoke VPC subnets.
+# Optional: Region for spoke VPC subnets (default: us-central1)
 region = "us-central1"
 
-# Name of the NCC hub.
-ncc_hub_name = "sample-ncc-hub-name"
+# Optional: NCC Hub Name
+ncc_hub_name = "example-mesh-hub"
+
+# Optional: List of external project IDs to auto-accept when spokes attach later
+auto_accept_projects = [
+  # "workload-project-1",
+  # "workload-project-2",
+]

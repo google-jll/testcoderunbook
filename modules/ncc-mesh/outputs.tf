@@ -1,10 +1,15 @@
 output "ncc_hub" {
-  description = "The NCC Hub object"
-  value       = google_network_connectivity_hub.hub
+  description = "The NCC Hub object (null if create_hub is false)"
+  value       = one(google_network_connectivity_hub.hub)
+}
+
+output "ncc_hub_id" {
+  description = "The NCC Hub ID used by spokes"
+  value       = local.hub_id
 }
 
 output "default_group" {
-  description = "The managed `default` group object (null unless auto_accept_projects is set)."
+  description = "The managed `default` group object (null unless create_hub is true and auto_accept_projects is set)."
   value       = one(google_network_connectivity_group.default)
 }
 

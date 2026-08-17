@@ -14,3 +14,9 @@ variable "ncc_hub_name" {
   type        = string
   default     = "example-mesh-hub"
 }
+
+variable "auto_accept_projects" {
+  description = "Project IDs (or numbers) whose spokes are automatically accepted into the mesh hub's default group when they attach later."
+  type        = list(string)
+  default     = []
+}

@@ -46,9 +46,10 @@ module "spoke_c_vpc" {
 module "ncc" {
   source = "../../../modules/ncc-mesh"
 
-  project_id          = var.project_id
-  ncc_hub_name        = var.ncc_hub_name
-  ncc_hub_description = "NCC mesh hub with any-to-any spokes"
+  project_id           = var.project_id
+  ncc_hub_name         = var.ncc_hub_name
+  ncc_hub_description  = "NCC mesh hub with any-to-any spokes"
+  auto_accept_projects = var.auto_accept_projects
 
   vpc_spokes = {
     "spoke-a" = { uri = module.spoke_a_vpc.vpc_id }

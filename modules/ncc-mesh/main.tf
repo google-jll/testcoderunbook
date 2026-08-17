@@ -1,4 +1,8 @@
 locals {
+  hub_id = var.create_hub ? try(google_network_connectivity_hub.hub[0].id, null) : (
+    var.ncc_hub_id != null ? var.ncc_hub_id : "projects/${coalesce(var.ncc_hub_project, var.project_id)}/locations/global/hubs/${var.ncc_hub_name}"
+  )
+
   vpc_spokes = {
     for k, v in google_network_connectivity_spoke.vpc_spoke :
     k => v
@@ -20,7 +24,9 @@ locals {
 # MESH topology hub. Every spoke attached to a mesh hub gets any-to-any
 # connectivity with every other spoke through the implicit `default` group —
 # there are no center/edge groups as in a star hub.
+# Managed only when create_hub is true.
 resource "google_network_connectivity_hub" "hub" {
+  count           = var.create_hub ? 1 : 0
   name            = var.ncc_hub_name
   project         = var.project_id
   description     = var.ncc_hub_description
@@ -31,14 +37,14 @@ resource "google_network_connectivity_hub" "hub" {
 }
 
 # The mesh hub's implicit `default` group. Managed only when auto_accept_projects
-# is set, so spokes from the listed projects are auto-accepted into the mesh.
+# is set and create_hub is true, so spokes from the listed projects are auto-accepted into the mesh.
 # NOTE: the auto-created default group stores `hub` as the bare hub name, so use
 # `.name` (not `.id`) — passing the full projects/.../hubs/<name> path forces a
 # spurious replacement on import.
 resource "google_network_connectivity_group" "default" {
-  count   = length(var.auto_accept_projects) > 0 ? 1 : 0
+  count   = var.create_hub && length(var.auto_accept_projects) > 0 ? 1 : 0
   name    = "default"
-  hub     = google_network_connectivity_hub.hub.name
+  hub     = google_network_connectivity_hub.hub[0].name
   project = var.project_id
 
   auto_accept {
@@ -48,11 +54,11 @@ resource "google_network_connectivity_group" "default" {
 
 resource "google_network_connectivity_spoke" "vpc_spoke" {
   for_each    = var.vpc_spokes
-  project     = split("/", each.value.uri)[1]
+  project     = coalesce(each.value.project, try(split("/", each.value.uri)[1], null), var.project_id)
   name        = each.key
   location    = "global"
   description = each.value.description
-  hub         = google_network_connectivity_hub.hub.id
+  hub         = local.hub_id
   labels      = merge(var.spoke_labels, each.value.labels)
 
   linked_vpc_network {
@@ -68,7 +74,7 @@ resource "google_network_connectivity_spoke" "producer_vpc_network_spoke" {
   name        = "${each.key}-linked-spoke"
   location    = "global"
   description = each.value.description
-  hub         = google_network_connectivity_hub.hub.id
+  hub         = local.hub_id
   labels      = merge(var.spoke_labels, each.value.labels)
 
   linked_producer_vpc_network {
@@ -82,11 +88,11 @@ resource "google_network_connectivity_spoke" "producer_vpc_network_spoke" {
 
 resource "google_network_connectivity_spoke" "hybrid_spoke" {
   for_each    = var.hybrid_spokes
-  project     = var.project_id
+  project     = coalesce(each.value.project, var.project_id)
   name        = each.key
   location    = each.value.location
   description = each.value.description
-  hub         = google_network_connectivity_hub.hub.id
+  hub         = local.hub_id
   labels      = merge(var.spoke_labels, each.value.labels)
 
   dynamic "linked_interconnect_attachments" {
@@ -110,11 +116,11 @@ resource "google_network_connectivity_spoke" "hybrid_spoke" {
 
 resource "google_network_connectivity_spoke" "router_appliance_spoke" {
   for_each    = var.router_appliance_spokes
-  project     = var.project_id
+  project     = coalesce(each.value.project, var.project_id)
   name        = each.key
   location    = each.value.location
   description = each.value.description
-  hub         = google_network_connectivity_hub.hub.id
+  hub         = local.hub_id
   labels      = merge(var.spoke_labels, each.value.labels)
 
   linked_router_appliance_instances {

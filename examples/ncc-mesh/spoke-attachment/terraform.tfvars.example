@@ -1,0 +1,25 @@
+# =====================================================================
+# Sample terraform.tfvars for NCC Mesh Spoke Attachment Example
+# Copy this file to terraform.tfvars and update values for your environment
+# =====================================================================
+
+# Required: The project where the new spoke VPC and spoke resource will live
+spoke_project_id = "your-workload-project-id"
+
+# Required: The hub project and hub name (or specify ncc_hub_id directly)
+hub_project_id = "your-hub-project-id"
+ncc_hub_name   = "corp-mesh-hub"
+
+# Optional direct hub ID override:
+# ncc_hub_id = "projects/your-hub-project-id/locations/global/hubs/corp-mesh-hub"
+
+# Optional: Spoke resource naming & VPC settings
+spoke_name     = "app1-workload-spoke"
+spoke_vpc_name = "app1-workload-vpc"
+environment    = "prod"
+region         = "us-central1"
+
+# Subnet CIDRs for DMZ, Application, and Data tiers
+subnet_cidr_dmz  = "10.120.0.0/24"
+subnet_cidr_app  = "10.120.1.0/24"
+subnet_cidr_data = "10.120.2.0/24"
