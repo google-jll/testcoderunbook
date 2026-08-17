@@ -44,7 +44,6 @@ terraform destroy
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | `parent` | Resource name of the parent folder or organization, e.g. \ | `string` | n/a | Yes |
-
 ## Outputs
 
 | Name | Description |

@@ -26,15 +26,14 @@ Enabling Log Analytics is **irreversible** on a bucket — plan accordingly.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| `project_id` | Project that owns the bucket and scope. | `string` | n/a | yes |
-| `region` | Default provider region. | `string` | `"us-west1"` | no |
-| `bucket_id` | Name of the log bucket. | `string` | `"example-logs"` | no |
-| `location` | Bucket location (`"global"` or a region). | `string` | `"global"` | no |
-| `retention_days` | Days to retain log entries. | `number` | `30` | no |
-| `scope_name` | Short name of the log scope. | `string` | `"example-scope"` | no |
-| `scope_resource_names` | Projects/views the scope spans. | `list(string)` | `[]` | no |
-| `sink_source_projects` | Projects whose logs are routed into the bucket (filtered). | `list(string)` | `[]` | no |
-
+| `project_id` | The GCP project that owns the log bucket and log scope. | `string` | n/a | Yes |
+| `bucket_id` | Name of the log bucket to create. | `string` | `"example-logs"` | No |
+| `location` | Location of the log bucket (\ | `string` | `"global"` | No |
+| `region` | Default provider region. | `string` | `"us-west1"` | No |
+| `retention_days` | Days to retain log entries in the bucket. | `number` | `30` | No |
+| `scope_name` | Short name of the log scope. | `string` | `"example-scope"` | No |
+| `scope_resource_names` | Projects and/or log views the scope spans (e.g. [\ | `list(string)` | `[]` | No |
+| `sink_source_projects` | Projects whose logs are routed into the bucket (one sink each). Leave empty to skip sink creation. The filter in main.tf applies to every sink. | `list(string)` | `[]` | No |
 ## Outputs
 
 | Name | Description |

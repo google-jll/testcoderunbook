@@ -45,14 +45,13 @@ terraform destroy
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| `project_id` | The target project ID to host the security policy. | `string` | n/a | Yes |
-| `policy_name` | The name of the Cloud Armor security policy. | `string` | n/a | Yes |
 | `allowed_ip_ranges` | List of whitelisted IP addresses mapped to Akamai WAF envelopes [4]. | `list(string)` | n/a | Yes |
-
+| `policy_name` | The name of the Cloud Armor security policy. | `string` | n/a | Yes |
+| `project_id` | The target project ID to host the security policy. | `string` | n/a | Yes |
 ## Outputs
 
 | Name | Description |
 |------|-------------|
+| `policy_name` | The name of the provisioned Cloud Armor policy. |
 | `security_policy_id` | The ID of the provisioned Cloud Armor policy. |
 | `security_policy_link` | The self-link of the provisioned Cloud Armor policy. |
-| `policy_name` | The name of the provisioned Cloud Armor policy. |

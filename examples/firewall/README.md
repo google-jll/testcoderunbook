@@ -47,7 +47,6 @@ terraform destroy
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | `project_id` | The GCP project to create the network and firewall rules in. | `string` | n/a | Yes |
-
 ## Outputs
 
 | Name | Description |

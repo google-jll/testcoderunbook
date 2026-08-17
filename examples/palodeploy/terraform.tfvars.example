@@ -1,0 +1,24 @@
+# =====================================================================
+# Sample terraform.tfvars for palodeploy example
+# Copy this file to terraform.tfvars and update values for your environment
+# =====================================================================
+
+# Required: GCP Project ID
+project_id = "your-gcp-project-id"
+
+# Optional: Deployment Region & 2 Zones for High Availability Distribution
+region = "us-central1"
+zones  = ["us-central1-a", "us-central1-b"]
+
+# Required: Panorama VM Auth Key used to register firewalls
+panos_auth_key = "your-panorama-auth-key-12345"
+
+# Optional: Image Overrides
+# By default, standard base Windows Server image family/project (windows-2022 / windows-cloud) are used
+# to ensure deployment succeeds without requiring GCP Marketplace image entitlements.
+# If you have subscribed to Palo Alto Networks Marketplace images in your GCP project,
+# you can uncomment and override the image parameters below:
+# panorama_image_family  = "panorama-byol-102"
+# panorama_image_project = "paloaltonetworksgcp-public"
+# fw_image_family        = "vmseries-byol-102"
+# fw_image_project       = "paloaltonetworksgcp-public"

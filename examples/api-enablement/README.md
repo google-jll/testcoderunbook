@@ -45,12 +45,11 @@ terraform destroy
 |------|-------------|------|---------|:--------:|
 | `project_id` | The GCP project to enable APIs on. | `string` | n/a | Yes |
 | `activate_apis` | List of APIs to enable on the project. | `list(string)` | `[]` | No |
-| `disable_services_on_destroy` | Whether project services will be disabled when the resources are destroyed. | `bool` | `true` | No |
 | `disable_dependent_services` | Whether dependent services are also disabled on destroy. | `bool` | `true` | No |
-
+| `disable_services_on_destroy` | Whether project services will be disabled when the resources are destroyed. | `bool` | `true` | No |
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| `project_id` | The project the APIs were enabled on. |
 | `enabled_apis` | The list of enabled APIs. |
+| `project_id` | The project the APIs were enabled on. |

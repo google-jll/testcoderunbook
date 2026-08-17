@@ -145,20 +145,29 @@ module "firewall_policy" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| `project_id` | GCP Project ID | `string` | n/a | yes |
-| `name` | Name of the firewall policy | `string` | `"consumer-policy"` | no |
-| `description` | Description of the policy | `string` | `null` | no |
-| `network_id` | VPC Network ID or self-link to attach policy to | `string` | `null` | no |
-| `rules` | Map of custom firewall policy rules | `map(object)` | `{}` | no |
-| `prefix` | Prefix to prepend to resource names | `string` | `""` | no |
-| `security_profile_group` | Security profile group for legacy intercept/mirroring | `string` | `null` | no |
-| `mirroring_deployment` | Enable mirroring deployment mode | `bool` | `false` | no |
-
+| `project_id` | The GCP project to create the firewall policy in. | `string` | n/a | Yes |
+| `create_association` | Whether to create the network firewall policy association with the VPC network specified in network_id. | `bool` | `true` | No |
+| `create_profile_rules` | Whether to create intercept/mirroring profile rules for security_profile_group. | `bool` | `false` | No |
+| `description` | An optional description of this network firewall policy. | `string` | `null` | No |
+| `egress_dest_ip_ranges` | Destination IP ranges matched by the default EGRESS rule. | `list(string)` | `["0.0.0.0/0"]` | No |
+| `egress_priority` | Priority of the default egress rule. | `number` | `11` | No |
+| `egress_src_ip_ranges` | Source IP ranges matched by the default EGRESS rule. | `list(string)` | `["0.0.0.0/0"]` | No |
+| `ingress_dest_ip_ranges` | Destination IP ranges matched by the default INGRESS rule. | `list(string)` | `["0.0.0.0/0"]` | No |
+| `ingress_priority` | Priority of the default ingress rule. | `number` | `10` | No |
+| `ingress_src_ip_ranges` | Source IP ranges matched by the default INGRESS rule. | `list(string)` | `["0.0.0.0/0"]` | No |
+| `mirroring_deployment` | If true, create mirroring rules (action = mirror, google-beta). If false, create intercept rules (action = apply_security_profile_group). | `bool` | `false` | No |
+| `name` | Base name for the network firewall policy (and its association). | `string` | `"consumer-policy"` | No |
+| `network_id` | Self link or id of the VPC network to associate the policy with. | `string` | `null` | No |
+| `prefix` | An optional string to prepend to created resource names. | `string` | `""` | No |
+| `rules` | Map of custom network firewall policy rules to create covering various directions, actions, target types, and match filters. | `any` | `{}` | No |
+| `security_profile_group` | Id of the security profile group applied (intercept) or mirrored to (mirroring) by legacy intercept/mirroring rules. | `string` | `null` | No |
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| `id` | The ID of the firewall policy |
-| `name` | The name of the firewall policy |
-| `association_id` | The ID of the VPC association |
-| `rules` | Map of created firewall policy rule resources |
+| `association_id` | The ID of the network firewall policy association (if associated). |
+| `id` | The ID of the network firewall policy. |
+| `name` | The name of the network firewall policy. |
+| `network_firewall_policy_id` | The unique identifier of the network firewall policy. |
+| `rule_tuple_count` | Total count of all firewall policy rule tuples. |
+| `rules` | Map of created custom firewall policy rules. |

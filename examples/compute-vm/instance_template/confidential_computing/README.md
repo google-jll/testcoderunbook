@@ -46,13 +46,12 @@ terraform destroy
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | `project_id` | The Google Cloud project ID. | `string` | n/a | Yes |
-| `region` | The GCP region to create and test resources in. | `string` | `"us-central1"` | No |
 | `subnetwork` | The subnetwork selflink to host the compute instances in. | `string` | n/a | Yes |
-| `service_account` | Service account to attach to the instance. See https://www.terraform.io/docs/providers/google/r/compute_instance_template#service_account. | `object({` | n/a | Yes |
-
+| `region` | The GCP region to create and test resources in. | `string` | `"us-central1"` | No |
+| `service_account` | Service account to attach to the instance. See https://www.terraform.io/docs/providers/google/r/compute_instance_template#service_account. | `object({ email = string, scopes = set(string) })` | `null` | No |
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| `self_link` | Self-link to the instance template. |
 | `name` | Name of the instance templates. |
+| `self_link` | Self-link to the instance template. |

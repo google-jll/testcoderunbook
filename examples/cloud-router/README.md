@@ -45,11 +45,10 @@ terraform destroy
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | `project_id` | The GCP project ID | `string` | n/a | Yes |
-
 ## Outputs
 
 | Name | Description |
 |------|-------------|
+| `project_id` | Project ID of the router |
 | `router_name` | The name of the created router |
 | `router_region` | The region of the created router |
-| `project_id` | Project ID of the router |

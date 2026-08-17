@@ -1,0 +1,13 @@
+# =====================================================================
+# Sample terraform.tfvars for cloud-kms
+# Copy this file to terraform.tfvars and update values for your environment
+# =====================================================================
+
+# The GCP project ID where KMS resources will be provisioned.
+project_id = "your-gcp-project-id"
+
+# The region or location for the Cloud KMS Key Ring.
+location = "us-central1"
+
+# The short name of the Cloud KMS Key Ring.
+keyring = "app-security-keyring"

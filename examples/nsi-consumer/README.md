@@ -46,12 +46,11 @@ terraform destroy
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| `project_id` | The GCP project to deploy the consumer into. | `string` | n/a | Yes |
 | `org_id` | The GCP organization ID (the security profile/group are org-scoped). | `string` | n/a | Yes |
-| `region` | The GCP region for the consumer network. | `string` | `"us-central1"` | No |
 | `producer_dg` | The producer's deployment group id (the nsi-producer example's `deployment_group_id` output). | `string` | n/a | Yes |
+| `project_id` | The GCP project to deploy the consumer into. | `string` | n/a | Yes |
 | `mirroring_deployment` | If true, wire the mirroring path; if false, the intercept path. Must match the producer. | `bool` | `false` | No |
-
+| `region` | The GCP region for the consumer network. | `string` | `"us-central1"` | No |
 ## Outputs
 
 | Name | Description |

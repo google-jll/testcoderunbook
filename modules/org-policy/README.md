@@ -90,17 +90,14 @@ module "org_policy" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| `parent` | Full resource path of the target scope (`organizations/1234567890`, `folders/1234567890`, or `projects/my-project-id`). | `string` | n/a | **Yes** |
-| `boolean_policies` | Map of Boolean Org Policies to enforce (`enforce = true`) or disable (`enforce = false`). Key is constraint name. | `map(object)` | `{}` | **No** |
-| `list_policies` | Map of List Org Policies configuring allowed/denied values, `allow_all`, `deny_all`, `inherit_from_parent`, or `reset`. | `map(object)` | `{}` | **No** |
-
----
-
+| `parent` | The parent resource URI where policies will be attached. Format: 'organizations/123456789012', 'folders/123456789012', or 'projects/my-project-id'. | `string` | n/a | Yes |
+| `boolean_policies` | Map of Boolean Org Policies to enforce (true) or disable (false). Key is constraint name (e.g. 'constraints/compute.requireShieldedVm'). | `map(object({ enforce = bool # true to enforce, false to disable/allow inherit_from_parent = optional(bool, false) reset = optional(bool, false) }))` | `{}` | No |
+| `list_policies` | Map of List Org Policies to configure. Key is constraint name (e.g. 'constraints/gcp.resourceLocations'). | `map(object({ allow = optional(list(string)) # List of allowed values deny = optional(list(string)) # List of denied values allow_all = optional(bool) # Allow all values deny_all = optional(bool) # Deny all values inherit_from_parent = optional(bool, false) reset = optional(bool, false) }))` | `{}` | No |
 ## Outputs
 
 | Name | Description |
 |------|-------------|
 | `boolean_policies` | Map of created Boolean Organization Policy resources. |
-| `list_policies` | Map of created List Organization Policy resources. |
 | `boolean_policy_ids` | Map of constraint names to Boolean Policy resource IDs. |
+| `list_policies` | Map of created List Organization Policy resources. |
 | `list_policy_ids` | Map of constraint names to List Policy resource IDs. |

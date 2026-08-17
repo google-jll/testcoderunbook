@@ -36,15 +36,14 @@ module "folders_iam" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| `bindings` | Map of role (key) and list of members (value) to add the IAM policies/bindings | `map(list(string))` | `{}` | No |
+| `conditional_bindings` | List of maps of role and respective conditions, and the members to add the IAM policies/bindings | `list(object({ role = string title = string description = string expression = string members = list(string) }))` | `[]` | No |
 | `folders` | Folders list to add the IAM policies/bindings | `list(string)` | `[]` | No |
 | `mode` | Mode for adding the IAM policies/bindings, additive and authoritative | `string` | `"additive"` | No |
-| `bindings` | Map of role (key) and list of members (value) to add the IAM policies/bindings | `map(list(string))` | `{` | No |
-| `conditional_bindings` | List of maps of role and respective conditions, and the members to add the IAM policies/bindings | `list(object({` | n/a | Yes |
-
 ## Outputs
 
 | Name | Description |
 |------|-------------|
 | `folders` | Folders which received bindings. |
-| `roles` | Roles which were assigned to members. |
 | `members` | Members which were bound to the folders. |
+| `roles` | Roles which were assigned to members. |

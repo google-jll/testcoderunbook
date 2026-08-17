@@ -82,32 +82,31 @@ gcloud logging scopes describe jll-network-scope \
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| `project_id` | Project that owns the bucket (and scope). | `string` | n/a | yes |
-| `bucket_id` | Name of the log bucket, or a well-known id (`_Default`/`_Required`) to adopt. | `string` | n/a | yes |
-| `location` | Bucket location: `"global"` or a supported region. | `string` | `"global"` | no |
-| `retention_days` | Days log entries are retained (min 1). | `number` | `30` | no |
-| `description` | Description of the bucket. | `string` | `null` | no |
-| `enable_analytics` | Enable Log Analytics (irreversible). | `bool` | `false` | no |
-| `locked` | Lock the retention period (bucket must be emptied before deletion). | `bool` | `false` | no |
-| `deletion_policy` | `DELETE`, `PREVENT`, or `ABANDON` on bucket destroy. | `string` | `"DELETE"` | no |
-| `kms_key_name` | CMEK key resource name for bucket encryption. | `string` | `null` | no |
-| `index_configs` | Custom field indexes (`{ field_path, type }`). | `list(object)` | `[]` | no |
-| `create_scope` | Whether to create a log scope. | `bool` | `false` | no |
-| `scope_name` | Short name of the log scope (required if `create_scope`). | `string` | `null` | no |
-| `scope_resource_names` | Projects/views the scope spans. | `list(string)` | `[]` | no |
-| `scope_description` | Description of the log scope. | `string` | `null` | no |
-| `scope_deletion_policy` | `DELETE`, `PREVENT`, or `ABANDON` on scope destroy. | `string` | `"DELETE"` | no |
-| `sink_name` | Name of the sink created in each source project. | `string` | `"central-logs-sink"` | no |
-| `sink_source_projects` | Projects whose logs are routed into the bucket. | `list(string)` | `[]` | no |
-| `sink_filter` | Advanced logs filter for every sink (`null` = all logs). | `string` | `null` | no |
-
+| `bucket_id` | Name of the log bucket. Use a custom name (e.g. \ | `string` | n/a | Yes |
+| `project_id` | The GCP project that owns the log bucket (and, if enabled, the log scope). | `string` | n/a | Yes |
+| `create_scope` | Whether to create a log scope alongside the bucket. | `bool` | `false` | No |
+| `deletion_policy` | How Terraform handles bucket destruction: \ | `string` | `"DELETE"` | No |
+| `description` | An optional description for the log bucket. | `string` | `null` | No |
+| `enable_analytics` | Enable Log Analytics (BigQuery-backed SQL querying) on the bucket. WARNING: this is irreversible once enabled. | `bool` | `false` | No |
+| `index_configs` | Optional list of custom field indexes to speed up queries against structured log fields. | `list(object({ field_path = string type = string }))` | `[]` | No |
+| `kms_key_name` | Optional CMEK key resource name to encrypt the bucket (format: projects/<id>/locations/<loc>/keyRings/<ring>/cryptoKeys/<key>). Requires the Cloud Logging service account to have access to the key. | `string` | `null` | No |
+| `location` | Location of the log bucket. \ | `string` | `"global"` | No |
+| `locked` | Lock the bucket so its retention period cannot be reduced. A locked bucket must be emptied before it can be deleted. | `bool` | `false` | No |
+| `retention_days` | Number of days log entries are retained in the bucket (minimum 1). | `number` | `30` | No |
+| `scope_deletion_policy` | How Terraform handles log scope destruction: \ | `string` | `"DELETE"` | No |
+| `scope_description` | An optional description for the log scope. | `string` | `null` | No |
+| `scope_name` | Short name of the log scope (e.g. \ | `string` | `null` | No |
+| `scope_resource_names` | Resources the log scope spans. Accepts project ids (projects/<id>) and log views (projects/<id>/locations/<loc>/buckets/<bucket>/views/<view>). Max 50 projects / 100 resources. | `list(string)` | `[]` | No |
+| `sink_filter` | Advanced logs filter applied to every sink. Null routes all logs. | `string` | `null` | No |
+| `sink_name` | Name of the log sink created in each source project. | `string` | `"central-logs-sink"` | No |
+| `sink_source_projects` | Projects whose logs are routed into this bucket. Include this bucket's own project to capture its logs too. The Terraform identity needs logging.sinks permission in every listed project. | `list(string)` | `[]` | No |
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| `bucket_id` | The `bucket_id` of the log bucket. |
-| `bucket_name` | Full resource name of the log bucket. |
-| `location` | Location of the log bucket. |
-| `scope_id` | Full resource id of the log scope (`null` if not created). |
-| `scope_resource_names` | Resources spanned by the scope (`null` if not created). |
-| `sink_writer_identities` | Map of source project => sink writer identity granted bucketWriter. |
+| `bucket_id` | The bucket_id of the log bucket. |
+| `bucket_name` | The full resource name of the log bucket (projects/<id>/locations/<loc>/buckets/<bucket_id>). |
+| `location` | The location of the log bucket. |
+| `scope_id` | The full resource id of the log scope, or null when create_scope is false. |
+| `scope_resource_names` | The resources spanned by the log scope, or null when create_scope is false. |
+| `sink_writer_identities` | Map of source project => the sink's writer identity (granted bucketWriter on the bucket's project). |

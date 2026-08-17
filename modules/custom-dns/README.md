@@ -101,23 +101,20 @@ module "custom_dns" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| `project_id` | The GCP project ID where DNS resources will be created. | `string` | n/a | **Yes** |
-| `platform_vpc_id` | The full resource ID or self_link of the Platform / Dedicated AD VPC Network. | `string` | n/a | **Yes** |
-| `app_spoke_vpc_ids` | List of App Spoke VPC IDs/self_links to bind private DNS zones to. | `list(string)` | `[]` | **No** |
-| `enable_inbound_endpoint` | Whether to create an Inbound DNS Endpoint Policy on the Platform VPC. | `bool` | `true` | **No** |
-| `inbound_policy_name` | Name of the DNS policy for the inbound endpoint. | `string` | `"dns-inbound-policy"` | **No** |
-| `private_zones` | Map of private DNS zones and nested record sets to create. | `map(object)` | `{}` | **No** |
-| `forwarding_zones` | Map of forwarding DNS zones (routing queries to external/AD name servers). | `map(object)` | `{}` | **No** |
-| `enable_google_apis_psc_dns` | Automatically create private zones for `googleapis.com` and `p.googleapis.com` pointing to PSC/PGA VIPs. | `bool` | `true` | **No** |
-| `google_apis_vips` | List of IP addresses for Google APIs (PGA/PSC VIPs). | `list(string)` | `["199.36.153.4", "199.36.153.5", "199.36.153.6", "199.36.153.7"]` | **No** |
-
----
-
+| `platform_vpc_id` | The full resource ID or self_link of the Dedicated AD (Platform) VPC Network. | `string` | n/a | Yes |
+| `project_id` | The GCP project ID where DNS resources will be created. | `string` | n/a | Yes |
+| `app_spoke_vpc_ids` | List of App Spoke VPC IDs/self_links to bind private DNS zones to. | `list(string)` | `[]` | No |
+| `enable_google_apis_psc_dns` | Automatically create private zones for googleapis.com and p.googleapis.com pointing to PSC/PGA VIPs. | `bool` | `true` | No |
+| `enable_inbound_endpoint` | Whether to create an Inbound DNS Endpoint Policy on the Platform VPC for AD conditional forwarders. | `bool` | `true` | No |
+| `forwarding_zones` | Map of forwarding DNS zones (e.g. forwarding *.corp.company.com to AD DNS IPs). | `map(object({ dns_name = string # e.g. "corp.company.com." description = optional(string, "Forwarding to AD DNS") target_name_servers = list(string) # AD DNS Server IPs }))` | `{}` | No |
+| `google_apis_vips` | List of IP addresses for Google APIs (e.g., 199.36.153.4, 199.36.153.5, 199.36.153.6, 199.36.153.7). | `list(string)` | `[ "199.36.153.4", "199.36.153.5", "199.36.153.6", "199.36.153.7" ]` | No |
+| `inbound_policy_name` | Name of the DNS policy for inbound endpoint. | `string` | `"dns-inbound-policy"` | No |
+| `private_zones` | Map of private DNS zones to create. | `map(object({ dns_name = string # e.g. "googleapis.com." description = optional(string, "Managed by Terraform") # Record sets to create inside this zone. `name` is the record FQDN # (e.g. "api.gcp.internal.company.com."); when omitted it defaults to the # zone's dns_name (the apex). records = optional(map(object({ name = optional(string) type = string ttl = number records = list(string) })), {}) }))` | `{}` | No |
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| `inbound_policy_id` | The ID of the created inbound DNS policy. |
-| `inbound_endpoint_entry_guidance` | Guidance on how to locate allocated Inbound Endpoint IPs in GCP. |
-| `private_zone_names` | Map of created private DNS zone short names. |
-| `forwarding_zone_names` | Map of created outbound forwarding DNS zone short names. |
+| `forwarding_zone_names` | Map of created forwarding DNS zone names. |
+| `inbound_endpoint_entry_guidance` | Guidance on how to find the created Inbound Endpoint IPs for Active Directory configuration. |
+| `inbound_policy_id` | The ID of the inbound DNS policy. |
+| `private_zone_names` | Map of created private DNS zone names. |

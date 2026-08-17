@@ -36,15 +36,14 @@ module "projects_iam" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| `projects` | Projects list to add the IAM policies/bindings | `list(string)` | `[]` | No |
+| `bindings` | Map of role (key) and list of members (value) to add the IAM policies/bindings | `map(list(string))` | `{}` | No |
+| `conditional_bindings` | List of maps of role and respective conditions, and the members to add the IAM policies/bindings | `list(object({ role = string title = string description = string expression = string members = list(string) }))` | `[]` | No |
 | `mode` | Mode for adding the IAM policies/bindings, additive and authoritative | `string` | `"additive"` | No |
-| `bindings` | Map of role (key) and list of members (value) to add the IAM policies/bindings | `map(list(string))` | `{` | No |
-| `conditional_bindings` | List of maps of role and respective conditions, and the members to add the IAM policies/bindings | `list(object({` | n/a | Yes |
-
+| `projects` | Projects list to add the IAM policies/bindings | `list(string)` | `[]` | No |
 ## Outputs
 
 | Name | Description |
 |------|-------------|
+| `members` | Members which were bound to projects. |
 | `projects` | Projects wich received bindings. |
 | `roles` | Roles which were assigned to members. |
-| `members` | Members which were bound to projects. |

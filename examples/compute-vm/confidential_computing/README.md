@@ -57,20 +57,19 @@ terraform destroy
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| `key` | Key name. | `string` | n/a | Yes |
+| `keyring` | Keyring name. | `string` | n/a | Yes |
 | `project_id` | The Google Cloud project ID. | `string` | n/a | Yes |
-| `region` | The GCP region to create and test resources in. | `string` | `"us-central1"` | No |
 | `subnetwork` | The subnetwork selflink to host the compute instances in. | `string` | n/a | Yes |
 | `location` | Location for the resources (keyring, key, network, etc.). | `string` | `"us"` | No |
-| `suffix` | A suffix to be used as an identifier for resources. (e.g., suffix for KMS Key, Keyring). | `string` | `""` | No |
-| `keyring` | Keyring name. | `string` | n/a | Yes |
-| `key` | Key name. | `string` | n/a | Yes |
+| `region` | The GCP region to create and test resources in. | `string` | `"us-central1"` | No |
 | `service_account_roles` | Predefined roles for the Service account that will be created for the VM. Remember to follow principles of least privileges with Cloud IAM. | `list(string)` | `[]` | No |
-
+| `suffix` | A suffix to be used as an identifier for resources. (e.g., suffix for KMS Key, Keyring). | `string` | `""` | No |
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| `self_link` | Self-link to the instance template. |
-| `name` | Name of the instance templates. |
 | `instance_self_link` | Self-link for compute instance. |
+| `name` | Name of the instance templates. |
+| `self_link` | Self-link to the instance template. |
 | `suffix` | Suffix used as an identifier for resources. |

@@ -50,27 +50,26 @@ terraform destroy
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | `project_id` | The GCP project to use for integration tests | `string` | n/a | Yes |
-| `hostname` | Hostname prefix for instances. | `string` | `"default"` | No |
+| `additional_disks` | List of maps of additional disks. See https://www.terraform.io/docs/providers/google/r/compute_instance_template#disk_name | `list(object({ disk_name = string device_name = string auto_delete = bool boot = bool disk_size_gb = number disk_type = string disk_labels = map(string) }))` | `[]` | No |
+| `auto_delete` | Whether or not the disk should be auto-deleted | `any` | `"true"` | No |
+| `can_ip_forward` | Enable IP forwarding, for NAT instances for example | `any` | `"false"` | No |
+| `disk_size_gb` | Disk size in GB | `any` | `"100"` | No |
+| `disk_type` | Disk type, can be either pd-ssd, local-ssd, or pd-standard | `"pd-standard"` | `"pd-standard"` | No |
+| `hostname` | Hostname prefix for instances. | `any` | `"default"` | No |
+| `labels` | Labels, provided as a map | `map(string)` | `{}` | No |
+| `machine_type` | Machine type to create, e.g. n1-standard-1 | `"n1-standard-1"` | `"n1-standard-1"` | No |
+| `metadata` | Metadata, provided as a map | `map(string)` | `{}` | No |
+| `named_ports` | Named name and named port | `list(object({ name = string port = number }))` | `[]` | No |
 | `region` | The GCP region where instances will be deployed. | `string` | `"us-central1"` | No |
-| `subnetwork` | Subnet to deploy to. Only one of network or subnetwork should be specified. | `string` | `""` | No |
-| `named_ports` | Named name and named port | `list(object({` | n/a | Yes |
-| `machine_type` | Machine type to create, e.g. n1-standard-1 | `string` | `"n1-standard-1"` | No |
-| `can_ip_forward` | Enable IP forwarding, for NAT instances for example | `string` | `"false"` | No |
-| `tags` | Network tags, provided as a list | `list(string)` | `[]` | No |
-| `labels` | Labels, provided as a map | `map(string)` | `{` | No |
-| `source_image` | Source disk image. If neither source_image nor source_image_family is specified, defaults to the latest public Rocky Linux 9 optimized for GCP image. | `string` | `""` | No |
-| `source_image_family` | Source image family. If neither source_image nor source_image_family is specified, defaults to the latest public Rocky Linux 9 optimized for GCP image. | `string` | `""` | No |
-| `source_image_project` | Project where the source image comes from. The default project contains Rocky Linux images. | `string` | `""` | No |
-| `disk_size_gb` | Disk size in GB | `string` | `"100"` | No |
-| `disk_type` | Disk type, can be either pd-ssd, local-ssd, or pd-standard | `string` | `"pd-standard"` | No |
-| `auto_delete` | Whether or not the disk should be auto-deleted | `string` | `"true"` | No |
-| `additional_disks` | List of maps of additional disks. See https://www.terraform.io/docs/providers/google/r/compute_instance_template#disk_name | `list(object({` | n/a | Yes |
-| `startup_script` | User startup script to run when instances spin up | `string` | `""` | No |
-| `metadata` | Metadata, provided as a map | `map(string)` | `{` | No |
-| `service_account` | n/a | `object({` | `null` | No |
-| `target_size` | The target number of running instances for this managed or unmanaged instance group. This value should always be explicitly set unless this resource is attached to an autoscaler, in which case it should never be set. | `string` | `1` | No |
+| `service_account` | Service account to attach to the instance. See https://www.terraform.io/docs/providers/google/r/compute_instance_template#service_account. | `object({ email = string scopes = set(string) })` | `null` | No |
+| `source_image` | Source disk image. If neither source_image nor source_image_family is specified, defaults to the latest public Rocky Linux 9 optimized for GCP image. | `any` | `""` | No |
+| `source_image_family` | Source image family. If neither source_image nor source_image_family is specified, defaults to the latest public Rocky Linux 9 optimized for GCP image. | `any` | `""` | No |
+| `source_image_project` | Project where the source image comes from. The default project contains Rocky Linux images. | `any` | `""` | No |
+| `startup_script` | User startup script to run when instances spin up | `any` | `""` | No |
 | `static_ips` | List of static IPs for VM instances. | `list(string)` | `[]` | No |
-
+| `subnetwork` | Subnet to deploy to. Only one of network or subnetwork should be specified. | `any` | `""` | No |
+| `tags` | Network tags, provided as a list | `list(string)` | `[]` | No |
+| `target_size` | The target number of running instances for this managed or unmanaged instance group. This value should always be explicitly set unless this resource is attached to an autoscaler, in which case it should never be set. | `any` | `1` | No |
 ## Outputs
 
 | Name | Description |

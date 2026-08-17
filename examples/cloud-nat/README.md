@@ -52,10 +52,9 @@ terraform destroy
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| `project_id` | The project ID to deploy to | `string` | n/a | Yes |
-| `network` | The VPC network self link | `string` | n/a | Yes |
-| `subnet` | The subnet self link | `string` | n/a | Yes |
-
+| `network` | The VPC network self link | `any` | n/a | Yes |
+| `project_id` | The project ID to deploy to | `any` | n/a | Yes |
+| `subnet` | The subnet self link | `any` | n/a | Yes |
 ## Outputs
 
 | Name | Description |

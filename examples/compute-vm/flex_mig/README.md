@@ -38,14 +38,13 @@ gcloud compute instance-groups managed describe flex-mig-mig \
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| `project_id` | The GCP project to create the resources in. | `string` | n/a | yes |
-| `region` | Region for the subnet and the flexible MIG. | `string` | `"us-central1"` | no |
-| `target_size` | Target number of running instances. | `number` | `3` | no |
-
+| `project_id` | The GCP project to create the resources in. | `string` | n/a | Yes |
+| `region` | The GCP region for the subnet and the flexible MIG. | `string` | `"us-central1"` | No |
+| `target_size` | The target number of running instances for the flexible MIG. | `number` | `3` | No |
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| `self_link` | Self link of the flexible MIG. |
-| `instance_group` | Instance-group URL (use as an LB backend). |
+| `instance_group` | The full URL of the instance group created by the MIG (use as an LB backend). |
 | `region` | The region the MIG was created in. |
+| `self_link` | Self link of the flexible managed instance group. |

@@ -54,13 +54,12 @@ terraform destroy
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | `project_id` | The GCP project to create the resources in. | `string` | n/a | Yes |
-| `region` | The GCP region for the network and instances. | `string` | `"us-central1"` | No |
-| `zone` | The GCP zone for the zonal instances and disks. | `string` | `"us-central1-b"` | No |
-| `num_instances` | Number of managed instances to create from the template. | `number` | `1` | No |
-| `service_account` | Service account to attach to the templated instances. See https://www.terraform.io/docs/providers/google/r/compute_instance_template#service_account. | `object({` | n/a | Yes |
 | `nat_ip` | Optional external IP to assign to the managed instances. Null lets GCP assign an ephemeral IP. | `string` | `null` | No |
 | `network_tier` | Network tier for the managed instances' external IP. | `string` | `"PREMIUM"` | No |
-
+| `num_instances` | Number of managed instances to create from the template. | `number` | `1` | No |
+| `region` | The GCP region for the network and instances. | `string` | `"us-central1"` | No |
+| `service_account` | Service account to attach to the templated instances. See https://www.terraform.io/docs/providers/google/r/compute_instance_template#service_account. | `object({ email = string scopes = set(string) })` | `null` | No |
+| `zone` | The GCP zone for the zonal instances and disks. | `string` | `"us-central1-b"` | No |
 ## Outputs
 
 | Name | Description |

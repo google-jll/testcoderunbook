@@ -1,0 +1,32 @@
+# =====================================================================
+# Sample terraform.tfvars for log-bucket
+# Copy this file to terraform.tfvars and update values for your environment
+# =====================================================================
+
+# The GCP project that owns the log bucket and log scope.
+project_id = "your-gcp-project-id"
+
+# Default provider region.
+region = "us-west1"
+
+# Name of the log bucket to create.
+bucket_id = "example-logs"
+
+# Location of the log bucket ("global" or a supported region).
+location = "global"
+
+# Days to retain log entries in the bucket.
+retention_days = 30
+
+# Short name of the log scope.
+scope_name = "example-scope"
+
+# Projects and/or log views the scope spans.
+scope_resource_names = [
+  "projects/your-gcp-project-id"
+]
+
+# Projects whose logs are routed into the bucket (one sink each). Leave empty to skip sink creation.
+sink_source_projects = [
+  "your-gcp-project-id"
+]

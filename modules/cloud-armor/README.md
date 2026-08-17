@@ -31,14 +31,13 @@ module "cloud_armor" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| `project_id` | The ID of the GCP project in which to provision the Cloud Armor policy. | `string` | n/a | Yes |
-| `policy_name` | The name of the Cloud Armor security policy. | `string` | n/a | Yes |
 | `allowed_ip_ranges` | List of whitelisted IP ranges isolated as parameterized variables. | `list(string)` | n/a | Yes |
-
+| `policy_name` | The name of the Cloud Armor security policy. | `string` | n/a | Yes |
+| `project_id` | The ID of the GCP project in which to provision the Cloud Armor policy. | `string` | n/a | Yes |
 ## Outputs
 
 | Name | Description |
 |------|-------------|
 | `policy_id` | The ID of the created Cloud Armor security policy. |
-| `policy_self_link` | The URI of the created Cloud Armor security policy. |
 | `policy_name` | Cloud Armor security policy name. |
+| `policy_self_link` | The URI of the created Cloud Armor security policy. |

@@ -129,24 +129,21 @@ terraform destroy
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| `project_id` | Optional target GCP project ID. Set `null` to skip resource creation. | `string` | `null` | **No** |
-| `alert_email` | Recipient email address for DevOps notification channel. | `string` | `"devops-alerts@example.com"` | **No** |
-| `cpu_threshold` | CPU utilization threshold (0.0 to 1.0) for high CPU alert policy. | `number` | `0.85` | **No** |
-| `app_hostname` | Hostname for synthetic HTTP availability check. | `string` | `"example.com"` | **No** |
-| `enable_notification_channels` | Boolean flag to toggle notification channel deployment. | `bool` | `true` | **No** |
-| `enable_alert_policies` | Boolean flag to toggle alert policy deployment. | `bool` | `true` | **No** |
-| `enable_metric_descriptors` | Boolean flag to toggle custom metric descriptor deployment. | `bool` | `true` | **No** |
-| `enable_dashboards` | Boolean flag to toggle custom dashboard deployment. | `bool` | `true` | **No** |
-| `enable_uptime_checks` | Boolean flag to toggle synthetic uptime check deployment. | `bool` | `true` | **No** |
-
----
-
+| `alert_email` | Email address for DevOps notification channel alerts. | `string` | `"devops-alerts@example.com"` | No |
+| `app_hostname` | Hostname for synthetic web app uptime check. | `string` | `"example.com"` | No |
+| `cpu_threshold` | CPU utilization threshold value (0.0 to 1.0) for high CPU alert policy. | `number` | `0.85` | No |
+| `enable_alert_policies` | Whether to deploy alert policies in this run. | `bool` | `true` | No |
+| `enable_dashboards` | Whether to deploy custom dashboards in this run. | `bool` | `true` | No |
+| `enable_metric_descriptors` | Whether to deploy custom metric descriptors in this run. | `bool` | `true` | No |
+| `enable_notification_channels` | Whether to deploy notification channels in this run. | `bool` | `true` | No |
+| `enable_uptime_checks` | Whether to deploy synthetic uptime checks in this run. | `bool` | `true` | No |
+| `project_id` | Optional. The GCP project ID where Cloud Monitoring resources will be deployed. | `string` | `null` | No |
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| `notification_channel_ids` | Map of created notification channel IDs. |
-| `alert_policy_ids` | Map of created alert policy IDs. |
-| `dashboard_ids` | Map of created custom dashboard IDs. |
-| `metric_descriptors` | Map of created custom metric descriptors. |
-| `uptime_check_ids` | Map of created synthetic uptime check IDs. |
+| `alert_policy_ids` | IDs of the created alert policies. |
+| `dashboard_ids` | IDs of the created custom dashboards. |
+| `metric_descriptors` | Created custom metric descriptors. |
+| `notification_channel_ids` | IDs of the created notification channels. |
+| `uptime_check_ids` | IDs of the created synthetic uptime checks. |

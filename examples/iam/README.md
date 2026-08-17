@@ -44,13 +44,12 @@ terraform destroy
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| `projects` | Project ids to apply the project-level IAM bindings to. | `list(string)` | `[]` | No |
 | `folders` | Folder ids to apply the folder-level IAM bindings to, e.g. \ | `list(string)` | `[]` | No |
+| `projects` | Project ids to apply the project-level IAM bindings to. | `list(string)` | `[]` | No |
 | `viewer_members` | Members granted the viewer roles (e.g. \ | `list(string)` | `[]` | No |
-
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| `project_roles` | Roles applied at the project level. |
 | `folder_roles` | Roles applied at the folder level. |
+| `project_roles` | Roles applied at the project level. |

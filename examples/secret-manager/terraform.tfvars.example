@@ -1,0 +1,13 @@
+# =====================================================================
+# Sample terraform.tfvars for secret-manager
+# Copy this file to terraform.tfvars and update values for your environment
+# =====================================================================
+
+# The GCP project ID where secrets and KMS CMEK resources will be provisioned.
+project_id = "your-gcp-project-id"
+
+# The region or location for the Cloud KMS Key Ring.
+location = "us-central1"
+
+# The name of the Cloud KMS Key Ring used for CMEK secret encryption.
+keyring_name = "secret-manager-keyring"

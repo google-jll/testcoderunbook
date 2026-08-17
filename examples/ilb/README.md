@@ -51,10 +51,9 @@ terraform destroy
 |------|-------------|------|---------|:--------:|
 | `project_id` | The GCP project to create the resources in. | `string` | n/a | Yes |
 | `region` | The GCP region for the network, MIG, and internal load balancer. | `string` | `"us-central1"` | No |
-
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| `ilb_ip_address` | The internal IP assigned to the load balancer forwarding rule. |
 | `forwarding_rule` | The forwarding rule self link. |
+| `ilb_ip_address` | The internal IP assigned to the load balancer forwarding rule. |

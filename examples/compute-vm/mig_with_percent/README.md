@@ -46,15 +46,14 @@ terraform destroy
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | `project_id` | The GCP project to use for integration tests | `string` | n/a | Yes |
+| `subnetwork` | The subnetwork to host the compute instances in | `any` | n/a | Yes |
 | `region` | The GCP region to create and test resources in | `string` | `"us-central1"` | No |
-| `subnetwork` | The subnetwork to host the compute instances in | `string` | n/a | Yes |
-| `service_account` | n/a | `object({` | `null` | No |
-
+| `service_account` | Service account email address and scopes | `object({ email = string scopes = set(string) })` | `null` | No |
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| `self_link` | Self-link of the managed instance group |
-| `region` | The GCP region to create and test resources in |
 | `preemptible_self_link` | Self-link of preemptible instance template |
+| `region` | The GCP region to create and test resources in |
 | `regular_self_link` | Self-link of regular instance template |
+| `self_link` | Self-link of the managed instance group |

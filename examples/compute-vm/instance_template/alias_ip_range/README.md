@@ -48,12 +48,11 @@ terraform destroy
 |------|-------------|------|---------|:--------:|
 | `project_id` | The GCP project to use for integration tests | `string` | n/a | Yes |
 | `region` | The GCP region to create and test resources in | `string` | `"us-central1"` | No |
-| `subnetwork` | The name of the subnetwork create this instance in. | `string` | `""` | No |
-| `service_account` | n/a | `object({` | `null` | No |
-
+| `service_account` | Service account to attach to the instance. See https://www.terraform.io/docs/providers/google/r/compute_instance_template#service_account. | `object({ email = string scopes = set(string) })` | `null` | No |
+| `subnetwork` | The name of the subnetwork create this instance in. | `any` | `""` | No |
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| `self_link` | Self-link to the instance template |
 | `name` | Name of the instance templates |
+| `self_link` | Self-link to the instance template |

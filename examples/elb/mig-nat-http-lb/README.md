@@ -51,14 +51,13 @@ terraform destroy
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| `region` | n/a | `string` | `"us-west1"` | No |
-| `network_name` | n/a | `string` | `"tf-lb-http-mig-nat"` | No |
 | `project` | n/a | `string` | n/a | Yes |
-
+| `network_name` | n/a | `any` | `"tf-lb-http-mig-nat"` | No |
+| `region` | n/a | `any` | `"us-west1"` | No |
 ## Outputs
 
 | Name | Description |
 |------|-------------|
+| `backend_services` | n/a |
 | `load-balancer-ip` | n/a |
 | `load-balancer-ipv6` | The IPv6 address of the load-balancer, if enabled; else \ |
-| `backend_services` | n/a |

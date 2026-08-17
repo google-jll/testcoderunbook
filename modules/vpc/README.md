@@ -35,21 +35,20 @@ module "vpc" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| `project_id` | Project ID that holds the network. | `string` | n/a | Yes |
 | `name` | Name of the VPC network. | `string` | n/a | Yes |
-| `description` | Optional description of the network. | `string` | `null` | No |
+| `project_id` | Project ID that holds the network. | `string` | n/a | Yes |
 | `auto_create_subnetworks` | Whether to create a subnet per region automatically. Keep false for a standalone/custom-mode VPC. | `bool` | `false` | No |
-| `routing_mode` | Network-wide routing mode: REGIONAL or GLOBAL. | `string` | `"REGIONAL"` | No |
-| `mtu` | MTU of the network (1300-8896). Null lets the provider use its default (1460). | `number` | `null` | No |
 | `delete_default_routes_on_create` | Delete the default 0.0.0.0/0 internet route when the network is created. | `bool` | `false` | No |
+| `description` | Optional description of the network. | `string` | `null` | No |
+| `mtu` | MTU of the network (1300-8896). Null lets the provider use its default (1460). | `number` | `null` | No |
 | `network_firewall_policy_enforcement_order` | Order that firewall rules and policies are evaluated: AFTER_CLASSIC_FIREWALL (GCP default) or BEFORE_CLASSIC_FIREWALL. | `string` | `"AFTER_CLASSIC_FIREWALL"` | No |
-| `subnets` | Subnets to create in this network, keyed by subnet name. | `map(object({` | n/a | Yes |
-
+| `routing_mode` | Network-wide routing mode: REGIONAL or GLOBAL. | `string` | `"REGIONAL"` | No |
+| `subnets` | Subnets to create in this network, keyed by subnet name. | `map(object({ region = string ip_cidr_range = string description = optional(string) private_ip_google_access = optional(bool, false) purpose = optional(string) role = optional(string) stack_type = optional(string) secondary_ip_ranges = optional(list(object({ range_name = string ip_cidr_range = string })), []) }))` | `{}` | No |
 ## Outputs
 
 | Name | Description |
 |------|-------------|
 | `network_id` | The network id (projects/<project>/global/networks/<name>). |
-| `network_self_link` | The network self link. |
 | `network_name` | The network name. |
+| `network_self_link` | The network self link. |
 | `subnets` | Map of subnet name to its id/self_link/region/cidr. |

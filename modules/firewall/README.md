@@ -33,12 +33,11 @@ module "firewall" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| `project_id` | Project id of the project that holds the network. | `string` | n/a | Yes |
 | `network_name` | Name of the network this set of firewall rules applies to. | `string` | n/a | Yes |
-| `rules` | This is DEPRECATED and available for backward compatibility. Use ingress_rules and egress_rules variables. List of custom rule definitions | `list(object({` | `[]` | No |
-| `ingress_rules` | List of ingress rules. This will be ignored if variable 'rules' is non-empty | `list(object({` | `[]` | No |
-| `egress_rules` | List of egress rules. This will be ignored if variable 'rules' is non-empty | `list(object({` | `[]` | No |
-
+| `project_id` | Project id of the project that holds the network. | `string` | n/a | Yes |
+| `egress_rules` | List of egress rules. This will be ignored if variable 'rules' is non-empty | `list(object({ name = string description = optional(string, null) disabled = optional(bool, null) priority = optional(number, null) destination_ranges = optional(list(string), []) source_ranges = optional(list(string), []) source_tags = optional(list(string)) source_service_accounts = optional(list(string)) target_tags = optional(list(string)) target_service_accounts = optional(list(string)) allow = optional(list(object({ protocol = string ports = optional(list(string)) })), []) deny = optional(list(object({ protocol = string ports = optional(list(string)) })), []) log_config = optional(object({ metadata = string })) }))` | `[]` | No |
+| `ingress_rules` | List of ingress rules. This will be ignored if variable 'rules' is non-empty | `list(object({ name = string description = optional(string, null) disabled = optional(bool, null) priority = optional(number, null) destination_ranges = optional(list(string), []) source_ranges = optional(list(string), []) source_tags = optional(list(string)) source_service_accounts = optional(list(string)) target_tags = optional(list(string)) target_service_accounts = optional(list(string)) allow = optional(list(object({ protocol = string ports = optional(list(string)) })), []) deny = optional(list(object({ protocol = string ports = optional(list(string)) })), []) log_config = optional(object({ metadata = string })) }))` | `[]` | No |
+| `rules` | This is DEPRECATED and available for backward compatibility. Use ingress_rules and egress_rules variables. List of custom rule definitions | `list(object({ name = string description = optional(string, null) direction = optional(string, "INGRESS") disabled = optional(bool, null) priority = optional(number, null) ranges = optional(list(string), []) source_tags = optional(list(string)) source_service_accounts = optional(list(string)) target_tags = optional(list(string)) target_service_accounts = optional(list(string)) allow = optional(list(object({ protocol = string ports = optional(list(string)) })), []) deny = optional(list(object({ protocol = string ports = optional(list(string)) })), []) log_config = optional(object({ metadata = string })) }))` | `[]` | No |
 ## Outputs
 
 | Name | Description |

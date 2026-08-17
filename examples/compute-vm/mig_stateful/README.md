@@ -52,14 +52,13 @@ terraform destroy
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | `project_id` | The GCP project to use for integration tests | `string` | n/a | Yes |
+| `subnetwork` | The subnetwork to host the compute instances in | `any` | n/a | Yes |
+| `target_size` | The target number of running instances for this managed instance group. This value should always be explicitly set unless this resource is attached to an autoscaler, in which case it should never be set. | `any` | n/a | Yes |
 | `region` | The GCP region to create and test resources in | `string` | `"us-central1"` | No |
-| `subnetwork` | The subnetwork to host the compute instances in | `string` | n/a | Yes |
-| `target_size` | The target number of running instances for this managed instance group. This value should always be explicitly set unless this resource is attached to an autoscaler, in which case it should never be set. | `string` | n/a | Yes |
-| `service_account` | n/a | `object({` | `null` | No |
-
+| `service_account` | Service account to attach to the instance. See https://www.terraform.io/docs/providers/google/r/compute_instance_template#service_account. | `object({ email = string scopes = set(string) })` | `null` | No |
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| `self_link` | Self-link of the managed instance group |
 | `region` | The GCP region to create and test resources in |
+| `self_link` | Self-link of the managed instance group |

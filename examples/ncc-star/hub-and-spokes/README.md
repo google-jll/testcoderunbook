@@ -46,13 +46,12 @@ terraform destroy
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | `project_id` | The GCP project that holds the hub and spoke networks. | `string` | n/a | Yes |
-| `region` | The GCP region for the spoke VPC subnets. | `string` | `"us-central1"` | No |
 | `ncc_hub_name` | Name of the NCC hub. | `string` | `"example-star-hub"` | No |
-
+| `region` | The GCP region for the spoke VPC subnets. | `string` | `"us-central1"` | No |
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| `hub` | The NCC hub object. |
 | `groups` | The center/edge group objects. |
+| `hub` | The NCC hub object. |
 | `spokes` | All spoke objects, keyed by type/name. |

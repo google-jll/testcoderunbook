@@ -34,17 +34,16 @@ module "service_account" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| `project_id` | Project that will own the service account and role bindings. | `string` | n/a | Yes |
 | `account_id` | The account id (the part before @) of the service account, e.g. \ | `string` | n/a | Yes |
-| `display_name` | Human-readable display name for the service account. | `string` | `null` | No |
+| `project_id` | Project that will own the service account and role bindings. | `string` | n/a | Yes |
 | `description` | Description of the service account. | `string` | `null` | No |
+| `display_name` | Human-readable display name for the service account. | `string` | `null` | No |
 | `project_roles` | Project-level IAM roles to grant to this service account (non-authoritative member bindings). | `list(string)` | `[]` | No |
-
 ## Outputs
 
 | Name | Description |
 |------|-------------|
 | `email` | The service account email. |
 | `id` | The service account fully-qualified id (projects/.../serviceAccounts/<email>). |
-| `name` | The fully-qualified name of the service account. |
 | `member` | The IAM member string (serviceAccount:<email>) for use in bindings. |
+| `name` | The fully-qualified name of the service account. |

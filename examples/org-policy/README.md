@@ -68,12 +68,9 @@ terraform destroy
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| `project_id` | Target GCP project ID. | `string` | n/a | **Yes** |
-| `parent` | Custom parent URI (`organizations/123...` or `folders/123...`). Defaults to project scope. | `string` | `null` | **No** |
-| `allowed_regions` | Allowed GCP region groups for resource location restriction. | `list(string)` | `["in:us-locations", "in:eu-locations"]` | **No** |
-
----
-
+| `project_id` | The GCP project ID to apply organization policies to. | `string` | n/a | Yes |
+| `allowed_regions` | List of GCP regional locations permitted by the resource locations policy. | `list(string)` | `["in:us-locations", "in:eu-locations"]` | No |
+| `parent` | Optional custom parent URI (e.g. 'organizations/1234567890' or 'folders/1234567890'). If omitted, defaults to 'projects/<project_id>'. | `string` | `null` | No |
 ## Outputs
 
 | Name | Description |

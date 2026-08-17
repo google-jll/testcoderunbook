@@ -173,26 +173,23 @@ terraform destroy
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| `project_id` | Central target GCP project ID hosting regional log buckets & sinks. | `string` | `null` | **No** |
-| `folder_id` | Optional target GCP folder ID (`folders/123456789`) for folder-level log aggregation. | `string` | `null` | **No** |
-| `disable_default_sink` | Whether to disable default project `_Default` log sink to enforce regional log storage. | `bool` | `false` | **No** |
-| `regional_bucket_location` | GCP region for custom regional log bucket (e.g., `us-central1`). | `string` | `"us-central1"` | **No** |
-| `regional_bucket_id` | Bucket ID for regional log bucket. | `string` | `"us-central1-regional-app-logs"` | **No** |
-| `audit_dataset_id` | Optional BigQuery dataset ID for audit log export (set `null` to omit). | `string` | `null` | **No** |
-| `archive_bucket_name` | Optional Cloud Storage bucket name for long-term archiving (set `null` to omit). | `string` | `null` | **No** |
-
----
-
+| `archive_bucket_name` | Optional Cloud Storage bucket name for long-term log archiving. Set to null if GCS archiving is not needed. | `string` | `null` | No |
+| `audit_dataset_id` | Optional BigQuery dataset ID for log sink export destination. Set to null if BigQuery export is not needed. | `string` | `null` | No |
+| `disable_default_sink` | Whether to disable the default project _Default log sink to force routing logs to custom regional log buckets. | `bool` | `false` | No |
+| `folder_id` | Optional GCP folder ID (e.g. 'folders/123456789' or '123456789') for folder-level log aggregation. | `string` | `null` | No |
+| `project_id` | Optional GCP project ID for project-level Cloud Logging resources. | `string` | `null` | No |
+| `regional_bucket_id` | Bucket ID for custom regional log bucket. | `string` | `"us-central1-regional-app-logs"` | No |
+| `regional_bucket_location` | Location for custom regional log bucket (e.g., us-central1, europe-west1). | `string` | `"us-central1"` | No |
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| `sink_writer_identities` | Service account writer identities for created project log sinks. |
-| `log_metrics` | Created project log-based metric objects. |
+| `default_sink_disabled` | Boolean indicating whether the default _Default sink was disabled. |
+| `folder_buckets` | Created folder-level log bucket details (when folder_id is supplied). |
+| `folder_exclusions` | Created folder-level log exclusion objects (when folder_id is supplied). |
+| `folder_sink_writer_identities` | Writer identities for folder-level log sinks (when folder_id is supplied). |
+| `folder_sinks` | Created folder-level log sink objects (when folder_id is supplied). |
 | `log_buckets` | Configured project log bucket details. |
 | `log_exclusions` | Created project log exclusion objects. |
-| `default_sink_disabled` | Boolean indicating whether the default project `_Default` sink was disabled. |
-| `folder_sinks` | Created folder-level log sink objects (when `folder_id` is set). |
-| `folder_sink_writer_identities` | Writer identities for folder-level log sinks. |
-| `folder_buckets` | Created folder-level log bucket details. |
-| `folder_exclusions` | Created folder-level log exclusion objects. |
+| `log_metrics` | Created project log-based metric objects. |
+| `sink_writer_identities` | Service account writer identities for created project log sinks. |

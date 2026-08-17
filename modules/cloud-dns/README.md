@@ -41,32 +41,31 @@ module "cloud_dns" {
 |------|-------------|------|---------|:--------:|
 | `domain` | Zone domain, must end with a period. | `string` | n/a | Yes |
 | `name` | Zone name, must be unique within the project. | `string` | n/a | Yes |
-| `private_visibility_config_networks` | List of VPC self links that can see this zone. | `list(string)` | `[]` | No |
-| `gke_clusters_list` | The list of Google Kubernetes Engine clusters that can see this zone. | `list(string)` | `[]` | No |
 | `project_id` | Project id for the zone. | `string` | n/a | Yes |
-| `target_name_server_addresses` | List of target name servers for forwarding zone. | `list(map(any))` | `[]` | No |
-| `target_network` | Peering network. | `string` | `""` | No |
+| `default_key_specs_key` | Object containing default key signing specifications : algorithm, key_length, key_type, kind. Please see https://www.terraform.io/docs/providers/google/r/dns_managed_zone#dnssec_config for futhers details | `any` | `{}` | No |
+| `default_key_specs_zone` | Object containing default zone signing specifications : algorithm, key_length, key_type, kind. Please see https://www.terraform.io/docs/providers/google/r/dns_managed_zone#dnssec_config for futhers details | `any` | `{}` | No |
 | `description` | zone description (shown in console) | `string` | `"Managed by Terraform"` | No |
-| `type` | Type of zone to create, valid values are 'public', 'private', 'forwarding', 'peering', 'reverse_lookup' and 'service_directory'. | `string` | `"private"` | No |
-| `dnssec_config` | Object containing : kind, non_existence, state. Please see https://www.terraform.io/docs/providers/google/r/dns_managed_zone#dnssec_config for futhers details | `any` | `{` | No |
-| `labels` | A set of key/value label pairs to assign to this ManagedZone | `map(any)` | `{` | No |
-| `default_key_specs_key` | Object containing default key signing specifications : algorithm, key_length, key_type, kind. Please see https://www.terraform.io/docs/providers/google/r/dns_managed_zone#dnssec_config for futhers details | `any` | `{` | No |
-| `default_key_specs_zone` | Object containing default zone signing specifications : algorithm, key_length, key_type, kind. Please see https://www.terraform.io/docs/providers/google/r/dns_managed_zone#dnssec_config for futhers details | `any` | `{` | No |
-| `force_destroy` | Set this true to delete all records in the zone. | `bool` | `false` | No |
-| `service_namespace_url` | n/a | `string` | `""` | No |
-| `recordsets` | n/a | `list(object({` | n/a | Yes |
+| `dnssec_config` | Object containing : kind, non_existence, state. Please see https://www.terraform.io/docs/providers/google/r/dns_managed_zone#dnssec_config for futhers details | `any` | `{}` | No |
 | `enable_logging` | Enable query logging for this ManagedZone | `bool` | `false` | No |
+| `force_destroy` | Set this true to delete all records in the zone. | `bool` | `false` | No |
+| `gke_clusters_list` | The list of Google Kubernetes Engine clusters that can see this zone. | `list(string)` | `[]` | No |
 | `iam_choice` | Choose one of the following 'iam_binding', 'iam_member' or 'iam_policy' for managed zone iam | `string` | `null` | No |
+| `labels` | A set of key/value label pairs to assign to this ManagedZone | `map(any)` | `{}` | No |
 | `member` | Identities the user/service account that will be granted the privilege in role (for case: managed_zone_iam_member) | `string` | `null` | No |
 | `members` | Identities the users/service accounts that will be granted the privilege in role (for case: managed_zone_iam_policy, managed_zone_iam_binding) | `list(string)` | `null` | No |
+| `private_visibility_config_networks` | List of VPC self links that can see this zone. | `list(string)` | `[]` | No |
+| `recordsets` | List of DNS record objects to manage, in the standard terraform dns structure. | `list(object({ name = string type = string ttl = number records = optional(list(string), null) routing_policy = optional(object({ wrr = optional(list(object({ weight = number records = list(string) })), []) geo = optional(list(object({ location = string records = list(string) })), []) })) }))` | `[]` | No |
 | `role` | The role that should be applied | `string` | `null` | No |
-
+| `service_namespace_url` | The fully qualified or partial URL of the service directory namespace that should be associated with the zone. This should be formatted like https://servicedirectory.googleapis.com/v1/projects/{project}/locations/{location}/namespaces/{namespace_id} or simply projects/{project}/locations/{location}/namespaces/{namespace_id}. | `string` | `""` | No |
+| `target_name_server_addresses` | List of target name servers for forwarding zone. | `list(map(any))` | `[]` | No |
+| `target_network` | Peering network. | `string` | `""` | No |
+| `type` | Type of zone to create, valid values are 'public', 'private', 'forwarding', 'peering', 'reverse_lookup' and 'service_directory'. | `string` | `"private"` | No |
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| `type` | The DNS zone type. |
-| `name` | The DNS zone name. |
 | `domain` | The DNS zone domain. |
-| `name_servers` | The DNS zone name servers. |
 | `etag` | The etag of the IAM policy |
+| `name` | The DNS zone name. |
+| `name_servers` | The DNS zone name servers. |
+| `type` | The DNS zone type. |

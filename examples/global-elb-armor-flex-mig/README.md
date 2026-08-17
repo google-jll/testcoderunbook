@@ -127,38 +127,35 @@ terraform apply
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| `project_id` | Target GCP Project ID. | `string` | - | **Yes** |
-| `org_id` | Target GCP Organization ID. | `string` | - | **Yes** |
-| `region` | GCP Region for regional resources (subnet, MIG, NAT). | `string` | `"us-central1"` | **No** |
-| `producer_dg` | Palo Alto NSI Producer Deployment Group URI. | `string` | `"projects/jllnetworkhub/locations/global/interceptDeploymentGroups/testjll-panw-dg"` | **No** |
-| `network_name` | Name of the VPC network. | `string` | `"elb-flex-mig-vpc"` | **No** |
-| `subnet_name` | Name of the subnetwork. | `string` | `"web-mig-subnet"` | **No** |
-| `subnet_cidr` | CIDR block for the subnetwork. | `string` | `"10.10.10.0/24"` | **No** |
-| `tag_key_name` | Short name for the Secure Tag Key. | `string` | `"environment"` | **No** |
-| `tag_value_name` | Short name for the Secure Tag Value. | `string` | `"web-mig-node"` | **No** |
-| `cloud_armor_policy_name` | Name of the Cloud Armor security policy. | `string` | `"elb-cloud-armor-allowlist"` | **No** |
-| `allowed_ip_ranges` | List of whitelisted IPv4 CIDR blocks allowed by Cloud Armor. | `list(string)` | `["203.0.113.0/24"]` | **No** |
-| `elb_name` | Name of the Global External Load Balancer. | `string` | `"global-web-elb"` | **No** |
-| `mig_name` | Base name for the Managed Instance Group. | `string` | `"web-app-mig"` | **No** |
-| `default_machine_type` | Default machine type for the compute instance template. | `string` | `"n1-standard-1"` | **No** |
-| `enable_flex_mig` | Toggle to enable Flexible MIG (`instance_selections`). | `bool` | `true` | **No** |
-| `flex_instance_selections` | Map of flexible instance selections (machine types & ranks). | `map(object)` | See `variables.tf` | **No** |
-| `min_replicas` | Minimum instance count for MIG autoscaling. | `number` | `2` | **No** |
-| `max_replicas` | Maximum instance count for MIG autoscaling. | `number` | `5` | **No** |
-
----
-
+| `org_id` | The GCP organization ID (Security profiles/groups are organization-scoped). | `string` | n/a | Yes |
+| `project_id` | The GCP project ID where consumer resources will be deployed. | `string` | n/a | Yes |
+| `allowed_ip_ranges` | List of whitelisted IPv4 CIDR blocks allowed to access the Load Balancer via Cloud Armor. | `list(string)` | `["203.0.113.0/24", "198.51.100.5/32"] # Example trusted IP ranges` | No |
+| `cloud_armor_policy_name` | Name of the Cloud Armor security policy. | `string` | `"elb-cloud-armor-allowlist"` | No |
+| `default_machine_type` | Default machine type for the compute instance template. | `string` | `"n1-standard-1"` | No |
+| `elb_name` | Name of the Global External Load Balancer. | `string` | `"global-web-elb"` | No |
+| `enable_flex_mig` | Whether to deploy a Flexible Managed Instance Group (Flex MIG) using multiple instance selections/machine types. | `bool` | `true` | No |
+| `flex_instance_selections` | Map of flexible instance selections (machine types & ranks) for Flex MIG. | `map(object({ machine_types = list(string) rank = number }))` | `{ "selection-n1-standard-1" = { machine_types = ["n1-standard-1"] rank = 1 } "selection-n2-standard-2" = { machine_types = ["n2-standard-2"] rank = 2 } "selection-e2-standard-2" = { machine_types = ["e2-standard-2"] rank = 3 } }` | No |
+| `max_replicas` | Maximum number of instances in the MIG autoscaler. | `number` | `5` | No |
+| `mig_name` | Base name and hostname for the Managed Instance Group. | `string` | `"web-app-mig"` | No |
+| `min_replicas` | Minimum number of instances in the MIG autoscaler. | `number` | `2` | No |
+| `network_name` | Name of the VPC network. | `string` | `"elb-flex-mig-vpc"` | No |
+| `producer_dg` | The producer's intercept deployment group URI (Palo Alto NSI producer). | `string` | `"projects/jllnetworkhub/locations/global/interceptDeploymentGroups/testjll-panw-dg"` | No |
+| `region` | The GCP region for regional resources (subnets, MIG, Cloud Router, Cloud NAT). | `string` | `"us-central1"` | No |
+| `subnet_cidr` | IP CIDR range for the subnetwork. | `string` | `"10.10.10.0/24"` | No |
+| `subnet_name` | Name of the subnetwork. | `string` | `"web-mig-subnet"` | No |
+| `tag_key_name` | Short name for the Secure Tag Key. | `string` | `"environment"` | No |
+| `tag_value_name` | Short name for the Secure Tag Value. | `string` | `"web-mig-node"` | No |
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| `elb_external_ip` | Public IPv4 address assigned to the Global External Load Balancer. |
-| `cloud_armor_policy_name` | Name of the created Cloud Armor security policy. |
-| `cloud_armor_policy_self_link` | URI of the created Cloud Armor security policy. |
+| `cloud_armor_policy_name` | Name of the Cloud Armor security policy. |
+| `cloud_armor_policy_self_link` | Self-link URI of the Cloud Armor security policy. |
+| `elb_external_ip` | The external IPv4 address assigned to the Global External Load Balancer forwarding rule. |
+| `mig_instance_group` | URI of the Managed Instance Group. |
+| `mig_self_link` | Self-link of the Managed Instance Group Manager. |
 | `nsi_producer_dg` | Palo Alto NSI Producer Deployment Group URI linked to NSI Consumer. |
 | `secure_tag_key_id` | Tag Key ID created for GCE instance classification. |
 | `secure_tag_value_id` | Tag Value ID attached to MIG GCE instances. |
-| `mig_instance_group` | Instance group URI of the Managed Instance Group. |
-| `mig_self_link` | Self-link of the Managed Instance Group Manager. |
+| `subnet_id` | ID of the created subnetwork. |
 | `vpc_network_name` | Name of the created VPC network. |
-| `subnet_id` | Resource ID of the created subnetwork. |

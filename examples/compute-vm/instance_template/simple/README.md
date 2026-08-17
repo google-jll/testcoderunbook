@@ -48,18 +48,17 @@ terraform destroy
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| `project_id` | The GCP project to use for integration tests | `string` | n/a | Yes |
-| `region` | The GCP region to create and test resources in | `string` | `"us-central1"` | No |
-| `subnetwork` | The name of the subnetwork create this instance in. | `string` | `""` | No |
-| `service_account` | n/a | `object({` | `null` | No |
-| `tags` | Network tags, provided as a list | `list(string)` | n/a | Yes |
 | `labels` | Labels, provided as a map | `map(string)` | n/a | Yes |
+| `project_id` | The GCP project to use for integration tests | `string` | n/a | Yes |
+| `tags` | Network tags, provided as a list | `list(string)` | n/a | Yes |
 | `enable_nested_virtualization` | Defines whether the instance should have nested virtualization enabled. | `bool` | `false` | No |
+| `region` | The GCP region to create and test resources in | `string` | `"us-central1"` | No |
+| `service_account` | Service account to attach to the instance. See https://www.terraform.io/docs/providers/google/r/compute_instance_template#service_account. | `object({ email = string scopes = set(string) })` | `null` | No |
+| `subnetwork` | The name of the subnetwork create this instance in. | `any` | `""` | No |
 | `threads_per_core` | The number of threads per physical core. To disable simultaneous multithreading (SMT) set this to 1. | `string` | `null` | No |
-
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| `self_link` | Self-link to the instance template |
 | `name` | Name of the instance templates |
+| `self_link` | Self-link to the instance template |

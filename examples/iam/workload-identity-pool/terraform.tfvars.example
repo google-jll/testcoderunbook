@@ -1,0 +1,19 @@
+# =====================================================================
+# Sample terraform.tfvars for workload-identity-pool example
+# Copy this file to terraform.tfvars and update values for your environment
+# =====================================================================
+
+# The GCP project ID to deploy the Workload Identity Pool into.
+project_id = "your-gcp-project-id"
+
+# The ID of the Workload Identity Pool.
+pool_id = "example-github-pool"
+
+# The GitHub repository in owner/repo format for attribute mapping.
+github_repo = "my-org/my-repo"
+
+# Whether to create a demo Service Account (true) or use an existing service account (false).
+create_service_account = true
+
+# Service Account ID to create (e.g. "github-deployer-sa") or existing Service Account email if create_service_account=false.
+service_account_id = "github-deployer-sa"

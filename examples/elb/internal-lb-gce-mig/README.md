@@ -56,7 +56,6 @@ terraform destroy
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | `project_id` | n/a | `string` | n/a | Yes |
-
 ## Outputs
 
 | Name | Description |

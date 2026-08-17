@@ -44,7 +44,6 @@ terraform destroy
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | `project_id` | The GCP project to create the service account in. | `string` | n/a | Yes |
-
 ## Outputs
 
 | Name | Description |

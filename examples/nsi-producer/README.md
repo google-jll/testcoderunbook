@@ -47,16 +47,15 @@ terraform destroy
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | `project_id` | The GCP project to deploy the producer into. | `string` | n/a | Yes |
-| `region` | The GCP region for the networks, firewalls, and load balancer. | `string` | `"us-central1"` | No |
-| `mirroring_deployment` | If true, create a mirroring deployment; if false, an intercept deployment. Must match the consumer. | `bool` | `false` | No |
+| `csp_authcodes` | (BYOL) authcode registered with your CSP account (optional for plan). | `string` | `""` | No |
 | `csp_pin_id` | VM-Series device certificate registration PIN ID (optional for plan). | `string` | `""` | No |
 | `csp_pin_value` | VM-Series device certificate registration PIN value (optional for plan). | `string` | `""` | No |
-| `csp_authcodes` | (BYOL) authcode registered with your CSP account (optional for plan). | `string` | `""` | No |
-
+| `mirroring_deployment` | If true, create a mirroring deployment; if false, an intercept deployment. Must match the consumer. | `bool` | `false` | No |
+| `region` | The GCP region for the networks, firewalls, and load balancer. | `string` | `"us-central1"` | No |
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| `deployment_group_id` | The producer's deployment group id. Pass this to the nsi-consumer module/example as producer_dg. |
 | `backend_service` | Id of the regional backend service fronting the firewalls. |
+| `deployment_group_id` | The producer's deployment group id. Pass this to the nsi-consumer module/example as producer_dg. |
 | `instance_group_manager` | Id of the firewall regional managed instance group. |

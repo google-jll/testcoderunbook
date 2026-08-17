@@ -96,3 +96,34 @@ gcloud compute network-firewall-policies rules list \
 gcloud resource-manager tags bindings list \
     --parent=//compute.googleapis.com/projects/YOUR_PROJECT_ID/zones/me-central2-a/instances/vm-app1-workload
 ```
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| `project_id` | The GCP project ID to deploy resources in. | `string` | n/a | Yes |
+| `create_profile_rules` | Whether to create default intercept/mirroring rules for security_profile_group. Set to true when security_profile_group is provided. | `bool` | `false` | No |
+| `create_tag_bindings` | Whether to create tag bindings on the sample Compute Engine VM instances. Requires roles/compute.instanceAdmin.v1 or roles/resourcemanager.tagUser permissions on the project. | `bool` | `true` | No |
+| `network_name` | Name of the VPC network to create. | `string` | `"vpc-secure-tags-demo"` | No |
+| `parent` | The parent resource where Secure Tags will be created (e.g. 'organizations/123456789012' or 'projects/my-project-id'). If null, defaults to 'projects/<project_id>'. | `string` | `null` | No |
+| `region` | The GCP region to deploy regional resources in. | `string` | `"me-central2"` | No |
+| `security_profile_group` | Optional Security Profile Group ID for NSI / Palo Alto intercept or mirroring steering. | `string` | `null` | No |
+| `subnet_cidr` | CIDR range for the demo subnet. | `string` | `"10.10.0.0/24"` | No |
+| `zone` | The GCP zone to deploy Compute Engine VM instances in. | `string` | `"me-central2-a"` | No |
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| `app1_tag_binding_id` | The ID of the location tag binding attaching app1 tag to vm-app1. |
+| `app1_vm_id` | The ID of the App1 VM instance. |
+| `app2_tag_binding_id` | The ID of the location tag binding attaching app2 tag to vm-app2. |
+| `app2_vm_id` | The ID of the App2 VM instance. |
+| `firewall_policy_association_id` | The association ID of the firewall policy with the VPC. |
+| `firewall_policy_id` | The ID of the created Network Firewall Policy. |
+| `firewall_policy_name` | The name of the created Network Firewall Policy. |
+| `secure_tag_keys` | Map of created Secure Tag Keys. |
+| `secure_tag_values` | Map of created Secure Tag Values. |
+| `secure_tag_values_by_key` | Nested map of [key_name][value_name] to Tag Value IDs. |
+| `subnetwork_id` | The ID of the created subnetwork. |
+| `vpc_network_id` | The ID of the created VPC network. |
+| `vpc_network_name` | The name of the created VPC network. |

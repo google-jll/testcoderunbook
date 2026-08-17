@@ -51,12 +51,11 @@ terraform destroy
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | `project_id` | The GCP project to create the DNS zones and networks in. | `string` | n/a | Yes |
-
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| `private_zone_name` | Name of the private managed zone. |
-| `public_zone_name_servers` | Name servers for the public zone. |
 | `forwarding_zone_name` | Name of the forwarding zone. |
 | `peering_zone_name` | Name of the peering zone. |
+| `private_zone_name` | Name of the private managed zone. |
+| `public_zone_name_servers` | Name servers for the public zone. |

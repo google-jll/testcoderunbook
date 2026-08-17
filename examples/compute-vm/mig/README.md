@@ -51,11 +51,10 @@ terraform destroy
 | `project_id` | The GCP project to create the resources in. | `string` | n/a | Yes |
 | `region` | The GCP region for the subnet and the flexible MIG. | `string` | `"us-central1"` | No |
 | `target_size` | The target number of running instances for the managed instance group. | `number` | `2` | No |
-
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| `self_link` | Self link of the flexible (regional) managed instance group. |
 | `instance_group` | The full URL of the instance group created by the MIG. |
 | `region` | The region the MIG was created in. |
+| `self_link` | Self link of the flexible (regional) managed instance group. |

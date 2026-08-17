@@ -48,19 +48,18 @@ terraform destroy
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| `project_id` | The target GCP Project ID. | `string` | n/a | Yes |
-| `vpc_name` | The name of the VPC. | `string` | n/a | Yes |
 | `environment` | Workload environment lifecycle stage (e.g., dev, uat, prod). | `string` | n/a | Yes |
-| `region` | The primary region for deployment. | `string` | `"us-west1"` | No |
-| `subnet_cidr_dmz` | CIDR range for the DMZ / Load Balancer Proxy Subnet Tier. | `string` | n/a | Yes |
+| `project_id` | The target GCP Project ID. | `string` | n/a | Yes |
 | `subnet_cidr_app` | CIDR range for the App Instances Subnet Tier. | `string` | n/a | Yes |
 | `subnet_cidr_data` | CIDR range for the Data Subnet Tier. | `string` | n/a | Yes |
-
+| `subnet_cidr_dmz` | CIDR range for the DMZ / Load Balancer Proxy Subnet Tier. | `string` | n/a | Yes |
+| `vpc_name` | The name of the VPC. | `string` | n/a | Yes |
+| `region` | The primary region for deployment. | `string` | `"us-west1"` | No |
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| `deployed_vpc_self_link` | The self-link of the deployed Standalone VPC. |
-| `deployed_subnet_dmz_id` | The ID of the deployed DMZ subnet. |
 | `deployed_subnet_app_id` | The ID of the deployed App subnet. |
 | `deployed_subnet_data_id` | The ID of the deployed Data subnet. |
+| `deployed_subnet_dmz_id` | The ID of the deployed DMZ subnet. |
+| `deployed_vpc_self_link` | The self-link of the deployed Standalone VPC. |
